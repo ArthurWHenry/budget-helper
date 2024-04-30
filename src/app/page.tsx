@@ -25,7 +25,7 @@ export default function Home() {
 
   const handleDownloadImage = async () => {
     const element = downloadRef.current;
-    const canvas = await html2canvas(element);
+    const canvas = await html2canvas(element as any);
 
     const data = canvas.toDataURL("image/jpg");
     const link = document.createElement("a");
