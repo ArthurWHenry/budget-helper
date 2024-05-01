@@ -1,4 +1,4 @@
-import { memo, useState } from "react";
+import { memo, use, useState } from "react";
 import {
   Cell,
   LabelList,
@@ -15,11 +15,16 @@ import {
   getExpenseTypeTotals,
   sortDataByExpenseType,
 } from "./helpers";
+import { dataState, incomeState } from "@/atoms";
+import { useRecoilValue } from "recoil";
 
 // TODO: We can have two separate views where we sort by expense type and show
-const Chart = ({ data, income }: { data: Expense[]; income: number }) => {
+const Chart = () => {
   // State
   const [viewTotals, setViewTotals] = useState<boolean>(false);
+
+  const data = useRecoilValue(dataState);
+  const income = useRecoilValue(incomeState);
 
   // Helpers
   const isHidden = data.length < 1;
@@ -39,7 +44,7 @@ const Chart = ({ data, income }: { data: Expense[]; income: number }) => {
   const finalsSortedChartData = [
     ...sortedData,
     {
-      name: "income",
+      name: "Leftover",
       cost: incomeDifference > 0 ? incomeDifference : 0,
     },
   ];
@@ -48,7 +53,7 @@ const Chart = ({ data, income }: { data: Expense[]; income: number }) => {
   const finalTotalsChartData = [
     ...chartData,
     {
-      name: "income",
+      name: "Leftover",
       cost: incomeDifference > 0 ? incomeDifference : 0,
     },
   ];

@@ -1,9 +1,9 @@
 type Expense = {
-  id: string;
+  id?: string;
   name: string;
   cost: number;
   expenseType: string;
-  notes: string;
+  notes?: string;
 };
 
 type TableExpense = {
@@ -11,6 +11,6 @@ type TableExpense = {
   name: string;
   cost: number;
   expenseType: string;
-  notes: string;
+  notes?: string;
   remove: JSX.Element;
 };

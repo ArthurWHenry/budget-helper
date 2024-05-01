@@ -4,7 +4,7 @@ export function getColor(expenseType: string) {
   if (expenseType === "want") return COLORS[0];
   if (expenseType === "need") return COLORS[1];
   if (expenseType === "save") return COLORS[2];
-  if (expenseType === "income") return COLORS[3];
+  if (expenseType === "leftover") return COLORS[3];
   return COLORS[3];
 }
 
@@ -29,7 +29,11 @@ export function sortDataByExpenseType(data: Expense[]) {
     want: 1,
     save: 2,
   };
-  return data.sort((a, b) => {
+
+  // Create a copy of data before sorting.
+  const dataCopy = [...data];
+
+  return dataCopy.sort((a, b) => {
     return expenseTypeOrder[a.expenseType] - expenseTypeOrder[b.expenseType];
   });
 }

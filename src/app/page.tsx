@@ -1,45 +1,31 @@
 "use client";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import classNames from "classnames";
-import { v4 as uuidv4 } from "uuid";
-import html2canvas from "html2canvas";
+
+// Atoms
+import { dataState, incomeState } from "@/atoms";
 
 // Components
-import { Chart, Table } from "@/components";
+import { AddExpense, Chart, Form, InputField, Table } from "@/components";
 
-export default function Home() {
-  const downloadRef = useRef<HTMLDivElement>(null);
+// Schema
+import { setIncomeSchema } from "@/schema";
+import { RecoilRoot, useRecoilState } from "recoil";
+
+function View() {
+  const [data] = useRecoilState<Expense[]>(dataState);
+  const [income, setIncome] = useRecoilState<number>(incomeState);
 
   // TODO: The idea is to have an export button to download the graphic a user creates.
   const [view, setView] = useState<"paycheck" | "monthly">("paycheck");
-  const [income, setIncome] = useState<number>(0);
-  const [name, setName] = useState<string>("");
-  const [cost, setCost] = useState<number>(0);
-  const [expenseType, setExpenseType] = useState<any>("want");
-  const [notes, setNotes] = useState<string>("");
-  const [data, setData] = useState<Expense[]>([]);
 
   // Helpers
-  const expenseTypes = ["want", "need", "save"];
-  const leftover = income - data.reduce((acc, { cost }) => acc + cost, 0);
+  const leftover =
+    (Number.isNaN(income) ? 0 : income) -
+    data.reduce((acc, { cost }) => acc + cost, 0);
 
-  const handleDownloadImage = async () => {
-    const element = downloadRef.current;
-    const canvas = await html2canvas(element as any);
-
-    const data = canvas.toDataURL("image/jpg");
-    const link = document.createElement("a");
-
-    if (typeof link.download === "string") {
-      link.href = data;
-      link.download = "image.jpg";
-
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-    } else {
-      window.open(data);
-    }
+  const onSubmitIncome = ({ income }: { income: number }) => {
+    setIncome(income);
   };
 
   return (
@@ -73,20 +59,33 @@ export default function Home() {
             <h2 className="text-2xl font-semibold text-gray-800">
               Paycheck Planner
             </h2>
-            <div className="flex flex-col p-2 gap-2 justify-center items-center">
+            <div className="flex flex-col p-2 gap-2 justify-center items-center text-center">
               <label className="text-lg font-semibold text-gray-700">
                 Paycheck amount
               </label>
-              <div className="w-full flex items-center gap-2">
-                <span className="text-xl font-semibold text-gray-900">$</span>
-                <input
-                  className="border rounded-md p-2"
-                  type="number"
-                  value={income}
-                  onChange={(evt) => setIncome(evt.target.valueAsNumber)}
-                  placeholder="Paycheck amount"
-                />
-              </div>
+              <Form
+                classes="w-full flex flex-col items-center gap-2 border rounded-md px-6 py-4 bg-gray-200 border-gray-300 justify-center"
+                handleSubmit={onSubmitIncome}
+                schema={setIncomeSchema}
+              >
+                {({ register, formState }: any): JSX.Element => (
+                  <>
+                    <InputField
+                      label="Paycheck amount (USD)"
+                      name="income"
+                      placeholder="Enter paycheck amount"
+                      register={register}
+                      error={formState.errors.income}
+                    />
+                    <button
+                      className="px-2 py-1 bg-gray-900 text-gray-50 rounded-md font-semibold hover:bg-gray-50 hover:text-gray-900 transition duration-150 ease-linear border border-gray-900 disabled:cursor-not-allowed disabled:bg-gray-300 disabled:text-gray-900 disabled:border-gray-300"
+                      type="submit"
+                    >
+                      Set Amount
+                    </button>
+                  </>
+                )}
+              </Form>
               <div className="flex">
                 <span
                   className={classNames(
@@ -98,91 +97,9 @@ export default function Home() {
                 </span>
               </div>
             </div>
-
-            <div className="flex justify-center items-end gap-4 max-w-4xl border rounded-md px-6 py-4 bg-gray-200 border-gray-300">
-              <div className="flex flex-col justify-center align-start">
-                <label className="font-semibold text-lg text-gray-800">
-                  Name
-                </label>
-                <input
-                  className="border border-gray-300 rounded-md p-1"
-                  type="text"
-                  value={name}
-                  onChange={(evt) => setName(evt.target.value)}
-                />
-              </div>
-              <div className="flex flex-col justify-center align-start">
-                <label className="font-semibold text-lg text-gray-800">
-                  Cost
-                </label>
-                <input
-                  className="border border-gray-300 rounded-md p-1"
-                  type="number"
-                  value={cost}
-                  onChange={(evt) => setCost(evt.target.valueAsNumber)}
-                />
-              </div>
-              <div className="flex flex-col justify-center align-start w-24">
-                <label className="font-semibold text-lg text-gray-800">
-                  Type
-                </label>
-                <select
-                  className="border border-gray-300 rounded-md p-1"
-                  onChange={(evt) => setExpenseType(evt.target.value)}
-                  value={expenseType}
-                >
-                  {expenseTypes.map((type) => (
-                    <option key={type} value={type}>
-                      {type}
-                    </option>
-                  ))}
-                </select>
-              </div>
-              <div className="flex flex-col justify-center align-start">
-                <label className="font-semibold text-lg text-gray-800">
-                  Notes
-                </label>
-                <input
-                  className="border border-gray-300 rounded-md p-1"
-                  type="text"
-                  value={notes}
-                  onChange={(evt) => setNotes(evt.target.value)}
-                />
-              </div>
-              <div className="self-end">
-                <button
-                  className="bg-gray-500 px-3 py-1 text-white rounded-md"
-                  onClick={() => {
-                    setData([
-                      ...data,
-                      {
-                        id: uuidv4(),
-                        expenseType,
-                        notes,
-                        cost,
-                        name,
-                      },
-                    ]);
-                    setName("");
-                    setCost(0);
-                    setExpenseType("want");
-                    setNotes("");
-                  }}
-                >
-                  +
-                </button>
-              </div>
-            </div>
-            <div
-              ref={downloadRef}
-              className="w-full h-full flex flex-col justify-center items-center"
-            >
-              <Chart data={data} income={income} />
-              <Table data={data} setData={setData} />
-            </div>
-            <button type="button" onClick={handleDownloadImage}>
-              Download as Image
-            </button>
+            <AddExpense />
+            <Chart />
+            <Table />
           </section>
         ) : (
           <section>
@@ -192,5 +109,13 @@ export default function Home() {
         )}
       </div>
     </main>
+  );
+}
+
+export default function Home() {
+  return (
+    <RecoilRoot>
+      <View />
+    </RecoilRoot>
   );
 }

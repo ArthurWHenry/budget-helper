@@ -1,4 +1,5 @@
-import { Dispatch, memo, SetStateAction, useState } from "react";
+import { memo } from "react";
+import { useRecoilState } from "recoil";
 import {
   createColumnHelper,
   flexRender,
@@ -6,13 +7,11 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 
-const Table = ({
-  data,
-  setData,
-}: {
-  data: Expense[];
-  setData: Dispatch<SetStateAction<Expense[]>>;
-}) => {
+// Atoms
+import { dataState } from "@/atoms";
+
+const Table = () => {
+  const [data, setData] = useRecoilState<Expense[]>(dataState);
   const columnHelper = createColumnHelper<TableExpense>();
 
   const columns = [
@@ -35,7 +34,6 @@ const Table = ({
     }),
     columnHelper.accessor("remove", {
       header: "",
-      minSize: 100,
       cell: (context: any) => (
         <button
           className="px-2 rounded hover:bg-gray-300 duration-150 transition ease-linear bg-gray-200"
@@ -49,7 +47,7 @@ const Table = ({
 
   // Define your remove entry function
   const removeEntry = (id: string) => {
-    setData(data.filter((entry) => entry.id !== id));
+    setData(data.filter((entry): boolean => entry.id !== id));
   };
 
   const table = useReactTable({
@@ -67,7 +65,7 @@ const Table = ({
               {headerGroup.headers.map((header) => (
                 <th
                   key={header.id}
-                  className="border text-gray-50 uppercase max-w-56"
+                  className="border text-gray-50 uppercase min-w-4"
                 >
                   {header.isPlaceholder
                     ? null
@@ -84,10 +82,7 @@ const Table = ({
           {table.getRowModel().rows.map((row) => (
             <tr key={row.id} className="border h-10">
               {row.getVisibleCells().map((cell) => (
-                <td
-                  key={cell.id}
-                  className="border bg-gray-50 text-center max-w-56"
-                >
+                <td key={cell.id} className="border bg-gray-50 text-center ">
                   {flexRender(cell.column.columnDef.cell, cell.getContext())}
                 </td>
               ))}
