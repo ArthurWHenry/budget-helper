@@ -20,7 +20,7 @@ const InputField: React.FC<InputFieldProps> = ({
 }: InputFieldProps): JSX.Element => {
   return (
     <div className="flex flex-col justify-center align-start w-full">
-      <label className="font-semibold text-gray-50">{label}</label>
+      <label className="font-semibold text-gray-900">{label}</label>
       <input
         aria-label={label}
         className={classNames(
