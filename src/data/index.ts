@@ -1,1 +1,1 @@
-export const expenseTypes = ["want", "need", "save"];
+export const expenseTypes = ["Need", "Save", "Want"];

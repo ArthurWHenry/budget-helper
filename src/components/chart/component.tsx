@@ -59,14 +59,12 @@ const Chart = () => {
   ];
 
   return isHidden ? (
-    <div>
-      <span className="text-lg text-gray-700">
-        Enter data into the table to see chart.
-      </span>
+    <div className="flex justify-center items-center">
+      <span className="text-lg text-gray-50">Enter data to see chart.</span>
     </div>
   ) : (
-    <div className="h-full">
-      <div className="min-h-80 min-w-80 h-80 w-80 bg-gray-900 m-3 rounded-lg p-2">
+    <div className="flex justify-center items-center flex-col gap-2 h-full">
+      <div className="min-h-80 min-w-80 h-80 w-80 bg-gray-900 m-3 rounded-lg">
         <ResponsiveContainer>
           {!viewTotals ? (
             <PieChart>
