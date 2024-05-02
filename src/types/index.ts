@@ -6,6 +6,12 @@ type Expense = {
   notes?: string;
 };
 
+type ExpenseSchema = {
+  name: string;
+  cost: number;
+  notes?: string;
+};
+
 type TableExpense = {
   id: string;
   name: string;

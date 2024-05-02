@@ -13,7 +13,7 @@ export const addExpenseSchema = yup.object().shape({
     .number()
     .typeError("Cost must be of number value.")
     .required("Cost field is required."),
-  expenseType: yup.string().required(),
+  // expenseType: yup.string().required("Expense type is required."),
   notes: yup.string().max(160, "Name must be less than 25 characters."),
 });
 

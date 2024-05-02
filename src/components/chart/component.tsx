@@ -18,7 +18,6 @@ import {
 import { dataState, incomeState } from "@/atoms";
 import { useRecoilValue } from "recoil";
 
-// TODO: We can have two separate views where we sort by expense type and show
 const Chart = () => {
   // State
   const [viewTotals, setViewTotals] = useState<boolean>(false);

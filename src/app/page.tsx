@@ -28,7 +28,7 @@ function View() {
   };
 
   return (
-    <div className="bg-gray-900 min-h-screen ">
+    <div className="bg-gray-900 min-h-screen">
       <section className="flex max-w-4xl mx-auto">
         <h1 className="text-lg font-bold text-gray-50 p-2">💸 Budget Helper</h1>
       </section>
@@ -37,24 +37,24 @@ function View() {
           Paycheck Planner
         </h2>
       </section>
-      <main className="flex flex-col items-center justify-start max-w-4xl mx-auto">
+      <main className="flex flex-col items-center justify-start max-w-4xl mx-auto p-4">
         <div className="flex flex-col justify-center items-center gap-6 w-full">
           <Form
-            classes="flex flex-col gap-2 w-full"
+            classes="flex flex-col gap-2 w-full bg-gray-50 rounded-lg p-4"
             handleSubmit={onSubmitIncome}
             schema={setIncomeSchema}
           >
             {({ register, formState }: any): JSX.Element => (
               <>
                 <InputField
-                  label="Paycheck amount (USD)"
+                  label="Paycheck amount"
                   name="income"
                   placeholder="Enter paycheck amount"
                   register={register}
                   error={formState.errors.income}
                 />
                 <button
-                  className="px-2 py-1 bg-gray-50 text-gray-900 rounded-md font-semibold hover:bg-gray-300 hover:text-gray-800 transition duration-150 ease-linear border border-gray-900 disabled:cursor-not-allowed disabled:bg-gray-300 disabled:text-gray-900 disabled:border-gray-300"
+                  className="px-4 py-2 border font-semibold rounded-md bg-gray-900 text-gray-50 hover:bg-gray-50 hover:text-gray-900 transition duration-150 ease-linear disabled:cursor-not-allowed disabled:bg-gray-300 disabled:text-gray-900 disabled:border-gray-300 w-full md:width-auto"
                   type="submit"
                 >
                   Set Amount
@@ -62,8 +62,8 @@ function View() {
               </>
             )}
           </Form>
-          <div className="w-full flex bg-gray-50 rounded-lg divide-x-2 divide-gray-900">
-            <div className="flex flex-col w-1/2 justify-center items-center p-4 gap-2">
+          <div className="w-full flex flex-col md:flex-row bg-gray-50 rounded-lg divide-y-2 md:divide-y-0 md:divide-x-2 divide-gray-900">
+            <div className="flex flex-col md:w-1/2 justify-center items-center p-4 gap-2">
               <h3 className="font-semibold text-lg">Income</h3>
               <span
                 className={classNames(
@@ -76,7 +76,7 @@ function View() {
                   : `$${income.toLocaleString()}`}
               </span>
             </div>
-            <div className="flex flex-col w-1/2 justify-center items-center p-4 gap-2">
+            <div className="flex flex-col md:w-1/2 justify-center items-center p-4 gap-2">
               <h3 className="font-semibold text-lg">Leftover</h3>
               <span
                 className={classNames(
