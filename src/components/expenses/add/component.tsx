@@ -24,7 +24,6 @@ const AddExpense = () => {
     handleSubmit,
     register,
     resetField,
-    setValue,
   } = useForm({
     resolver: yupResolver(addExpenseSchema),
   });
@@ -32,7 +31,7 @@ const AddExpense = () => {
   const [showForm, setShowForm] = useState(false);
   const [data, setData] = useRecoilState(dataState);
   const [selectedExpenseType, setSelectedExpenseType] = useState({
-    label: "Want",
+    label: "Need",
     value: 0,
   });
 
