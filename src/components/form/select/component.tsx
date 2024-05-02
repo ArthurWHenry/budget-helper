@@ -18,11 +18,11 @@ const SelectField: React.FC<SelectFieldProps> = ({
   error,
 }: SelectFieldProps): JSX.Element => {
   return (
-    <div className="flex flex-col justify-center align-start">
-      <label className="font-semibold text-gray-800">{label}</label>
+    <div className="flex flex-col justify-center align-start w-full">
+      <label className="font-semibold text-gray-50">{label}</label>
       <select
         aria-label={name}
-        className="border border-gray-300 rounded-md px-2 py-1"
+        className="rounded-md px-4 py-2 border"
         disabled={isDisabled}
         {...register(name)}
       >

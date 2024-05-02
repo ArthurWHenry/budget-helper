@@ -6,6 +6,7 @@ import {
   getCoreRowModel,
   useReactTable,
 } from "@tanstack/react-table";
+import toast from "react-hot-toast";
 
 // Atoms
 import { dataState } from "@/atoms";
@@ -48,6 +49,9 @@ const Table = () => {
   // Define your remove entry function
   const removeEntry = (id: string) => {
     setData(data.filter((entry): boolean => entry.id !== id));
+
+    // Show success message
+    toast.success("Expense removed successfully!");
   };
 
   const table = useReactTable({
@@ -56,16 +60,22 @@ const Table = () => {
     getCoreRowModel: getCoreRowModel(),
   });
 
-  return (
-    <div className="p-2 w-full">
+  const isHidden = data.length < 1;
+
+  return isHidden ? (
+    <div className="flex justify-center items-center">
+      <span className="text-lg text-gray-50">Enter data to see table.</span>
+    </div>
+  ) : (
+    <div className="w-full rounded-lg bg-gray-50 overflow-hidden">
       <table className="max-w-4xl mx-auto w-full">
-        <thead className="bg-gray-900 border">
+        <thead className="bg-gray-50 h-10 border-b">
           {table.getHeaderGroups().map((headerGroup) => (
             <tr key={headerGroup.id}>
               {headerGroup.headers.map((header) => (
                 <th
                   key={header.id}
-                  className="border text-gray-50 uppercase min-w-4"
+                  className=" text-gray-900 uppercase min-w-4 border-r"
                 >
                   {header.isPlaceholder
                     ? null
@@ -80,9 +90,9 @@ const Table = () => {
         </thead>
         <tbody className="border">
           {table.getRowModel().rows.map((row) => (
-            <tr key={row.id} className="border h-10">
+            <tr key={row.id} className="h-10">
               {row.getVisibleCells().map((cell) => (
-                <td key={cell.id} className="border bg-gray-50 text-center ">
+                <td key={cell.id} className="text-center ">
                   {flexRender(cell.column.columnDef.cell, cell.getContext())}
                 </td>
               ))}
