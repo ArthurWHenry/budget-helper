@@ -1,7 +1,7 @@
 import { memo, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+import { useRecoilState } from "recoil";
 import { v4 as uuidv4 } from "uuid";
 import { toast } from "react-hot-toast";
 
@@ -30,7 +30,6 @@ const AddExpense = () => {
   });
 
   const [showForm, setShowForm] = useState(false);
-  const income = useRecoilValue(incomeState);
   const [data, setData] = useRecoilState(dataState);
 
   const onSubmitExpense: SubmitHandler<Expense> = (newData) => {
@@ -47,23 +46,26 @@ const AddExpense = () => {
   };
 
   return (
-    <div className="bg-gray-50 p-4 w-full rounded-lg">
-      <div className="flex w-full justify-between items-center">
+    <div className="bg-gray-50 w-full rounded-lg">
+      <button
+        className="flex w-full justify-between items-center p-4"
+        onClick={() => setShowForm(!showForm)}
+      >
         <div>
           <span className="text-gray-900 text-lg font-semibold">
             Add Expense
           </span>
         </div>
-        <button onClick={() => setShowForm(!showForm)}>
+        <div>
           {showForm ? (
             <ChevronUpIcon className="h-6 w-6 text-gray-900" />
           ) : (
             <ChevronDownIcon className="h-6 w-6 text-gray-900" />
           )}
-        </button>
-      </div>
+        </div>
+      </button>
       {showForm && (
-        <div className="gap-2 flex flex-col">
+        <div className="gap-2 flex flex-col pb-4 px-4 border-t">
           <form
             className="flex justify-between items-end gap-2 w-full"
             onSubmit={handleSubmit(onSubmitExpense)}
