@@ -1,10 +1,10 @@
 const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
 
 export function getColor(expenseType: string) {
-  if (expenseType === "want") return COLORS[0];
-  if (expenseType === "need") return COLORS[1];
-  if (expenseType === "save") return COLORS[2];
-  if (expenseType === "leftover") return COLORS[3];
+  if (expenseType === "Need") return COLORS[0];
+  if (expenseType === "Save") return COLORS[1];
+  if (expenseType === "Want") return COLORS[2];
+  if (expenseType === "Leftover") return COLORS[3];
   return COLORS[3];
 }
 
@@ -25,9 +25,9 @@ export function getExpenseTypeTotals(data: Expense[]) {
 
 export function sortDataByExpenseType(data: Expense[]) {
   const expenseTypeOrder: { [key: string]: number } = {
-    need: 0,
-    want: 1,
-    save: 2,
+    Need: 0,
+    Save: 1,
+    Want: 2,
   };
 
   // Create a copy of data before sorting.
