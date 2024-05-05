@@ -7,7 +7,7 @@ const StatCard: React.FC<StatCardProps> = ({ title, value }: StatCardProps) => {
       <h3 className="font-semibold text-lg">{title}</h3>
       <span
         className={classNames(
-          "text-2xl font-bold",
+          "text-3xl font-bold",
           value < 0 ? "text-red-900" : "text-green-900"
         )}
       >

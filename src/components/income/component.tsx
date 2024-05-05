@@ -2,7 +2,7 @@ import { memo } from "react";
 import { SetterOrUpdater, useSetRecoilState } from "recoil";
 import classNames from "classnames";
 import { Disclosure } from "@headlessui/react";
-import { ChevronRightIcon } from "@heroicons/react/20/solid";
+import { ChevronRightIcon } from "@heroicons/react/24/solid";
 
 // Atoms
 import { incomeState } from "@/atoms";
@@ -28,11 +28,9 @@ const SetIncome: React.FC = () => {
         {({ open }) => (
           <>
             <Disclosure.Button className="flex w-full justify-between items-center p-4">
-              <div>
-                <span className="text-gray-900 text-lg font-semibold">
-                  Set Paycheck Amount
-                </span>
-              </div>
+              <span className="text-gray-900 text-lg font-semibold">
+                Set Paycheck Amount
+              </span>
               <ChevronRightIcon
                 className={classNames("h-5 w-5 text-gray-900", {
                   "rotate-90 transform": open,

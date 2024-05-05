@@ -59,11 +59,9 @@ const AddExpense = () => {
         {({ open }) => (
           <>
             <Disclosure.Button className="flex w-full justify-between items-center p-4">
-              <div>
-                <span className="text-gray-900 text-lg font-semibold">
-                  Add Expense
-                </span>
-              </div>
+              <span className="text-gray-900 text-lg font-semibold">
+                Add Expense
+              </span>
               <ChevronRightIcon
                 className={classNames("h-5 w-5 text-gray-900", {
                   "rotate-90 transform": open,
