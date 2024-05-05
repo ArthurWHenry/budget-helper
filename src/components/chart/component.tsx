@@ -1,4 +1,5 @@
 import { memo, use, useState } from "react";
+import { useRecoilValue } from "recoil";
 import {
   Cell,
   LabelList,
@@ -9,19 +10,21 @@ import {
   Tooltip,
 } from "recharts";
 
+// Atoms
+import { dataState, incomeState } from "@/atoms";
+
 // Helpers
 import {
   getColor,
   getExpenseTypeTotals,
   sortDataByExpenseType,
 } from "./helpers";
-import { dataState, incomeState } from "@/atoms";
-import { useRecoilValue } from "recoil";
 
 const Chart = () => {
   // State
   const [viewTotals, setViewTotals] = useState<boolean>(false);
 
+  // Selectors
   const data = useRecoilValue(dataState);
   const income = useRecoilValue(incomeState);
 
@@ -33,13 +36,10 @@ const Chart = () => {
     name: expenseType,
     cost: expenseTypeTotals[expenseType],
   }));
-
-  // Calculate the total cost
   const totalCost = chartData.reduce((total, entry) => total + entry.cost, 0);
-
-  // Calculate the difference from income
   const incomeDifference = income - totalCost;
 
+  // Final data
   const finalsSortedChartData = [
     ...sortedData,
     {
@@ -47,8 +47,6 @@ const Chart = () => {
       cost: incomeDifference > 0 ? incomeDifference : 0,
     },
   ];
-
-  // Add the income difference to the chart data
   const finalTotalsChartData = [
     ...chartData,
     {

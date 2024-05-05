@@ -12,8 +12,12 @@ import toast from "react-hot-toast";
 import { dataState } from "@/atoms";
 
 const Table = () => {
+  // State
   const [data, setData] = useRecoilState<Expense[]>(dataState);
+
+  // Helpers
   const columnHelper = createColumnHelper<TableExpense>();
+  const isHidden = data.length < 1;
 
   const columns = [
     columnHelper.accessor("name", {
@@ -46,6 +50,7 @@ const Table = () => {
     }),
   ];
 
+  // Handlers
   // Define your remove entry function
   const removeEntry = (id: string) => {
     setData(data.filter((entry): boolean => entry.id !== id));
@@ -59,8 +64,6 @@ const Table = () => {
     columns,
     getCoreRowModel: getCoreRowModel(),
   });
-
-  const isHidden = data.length < 1;
 
   return isHidden ? (
     <div className="flex justify-center items-center">
