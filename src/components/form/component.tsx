@@ -22,6 +22,7 @@ const Form: React.FC<FormComponentProps> = ({
     ...options,
     resolver: schema && yupResolver(schema),
   });
+
   useEffect(() => {
     if (Object.keys(methods.formState.errors).length > 0) {
       Object.values(methods.formState.errors).map((error) => {

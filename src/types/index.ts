@@ -12,6 +12,11 @@ type ExpenseSchema = {
   notes?: string;
 };
 
+type StatCardProps = {
+  title: string;
+  value: number;
+};
+
 type TableExpense = {
   id: string;
   name: string;
