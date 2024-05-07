@@ -3,26 +3,23 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import toast from "react-hot-toast";
 
-type FormComponentProps = {
-  classes?: string;
-  handleSubmit: any;
-  children: any;
-  options?: any;
-  schema?: any;
-};
+// Types
+import { FormProps } from "@/types";
 
-const Form: React.FC<FormComponentProps> = ({
+const Form: React.FC<FormProps> = ({
   classes,
   handleSubmit,
   options,
   schema,
   children,
-}: FormComponentProps): JSX.Element => {
+}: FormProps): JSX.Element => {
+  // Hooks
   const methods = useForm({
     ...options,
     resolver: schema && yupResolver(schema),
   });
 
+  // Effects
   useEffect(() => {
     if (Object.keys(methods.formState.errors).length > 0) {
       Object.values(methods.formState.errors).map((error) => {

@@ -1,2 +1,2 @@
-import SetIncome from "./component";
-export { SetIncome };
+import AddIncome from "./component";
+export { AddIncome };

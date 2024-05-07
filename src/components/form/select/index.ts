@@ -1,2 +1,2 @@
-import SelectField from "./component";
-export { SelectField };
+import Select from "./component";
+export { Select };

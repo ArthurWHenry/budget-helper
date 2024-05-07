@@ -12,7 +12,7 @@ import classNames from "classnames";
 import { dataState } from "@/atoms";
 
 // Components
-import { InputField, SelectField } from "@/components/form";
+import { Input, Select } from "@/components/form";
 
 // Data
 import { expenseTypes } from "@/data";
@@ -20,7 +20,14 @@ import { expenseTypes } from "@/data";
 // Schema
 import { addExpenseSchema } from "@/schema";
 
+// Styles
+import "./styles.css";
+
+// Types
+import { ExpenseSchema } from "@/types";
+
 const AddExpense = () => {
+  // Hooks
   const {
     formState: { errors },
     handleSubmit,
@@ -30,12 +37,14 @@ const AddExpense = () => {
     resolver: yupResolver(addExpenseSchema),
   });
 
+  // State
   const [data, setData] = useRecoilState(dataState);
   const [selectedExpenseType, setSelectedExpenseType] = useState({
     label: "Need",
     value: 0,
   });
 
+  // Handlers
   const onSubmitExpense: SubmitHandler<ExpenseSchema> = (newData) => {
     setData([
       ...data,
@@ -52,51 +61,48 @@ const AddExpense = () => {
     toast.success("Expense added successfully!");
   };
 
-  //className="bg-gray-50 w-full rounded-lg"
   return (
-    <div className="w-full bg-gray-50 rounded-lg border shadow-md border-gray-300">
+    <div className="add-expense-container">
       <Disclosure>
         {({ open }) => (
           <>
-            <Disclosure.Button className="flex w-full justify-between items-center p-4">
-              <span className="text-gray-900 text-lg font-semibold">
-                Add Expense
-              </span>
+            <Disclosure.Button className="add-expense-button">
+              <span className="add-expense-button-text">Add Expense</span>
               <ChevronRightIcon
                 className={classNames("h-5 w-5 text-gray-900", {
                   "rotate-90 transform": open,
                 })}
               />
             </Disclosure.Button>
-            <Disclosure.Panel className="border-t rounded-b-lg">
+            <Disclosure.Panel className="add-expense-panel">
               <div className="gap-2 flex flex-col pb-4 px-4 w-full">
                 <form
-                  className="flex flex-col gap-2 w-full"
+                  className="add-expense-form"
                   onSubmit={handleSubmit(onSubmitExpense)}
                 >
-                  <div className="flex pt-2 flex-col md:flex-row justify-between items-end gap-2 w-full">
-                    <InputField
+                  <div className="add-expense-form-container">
+                    <Input
                       label="Name"
                       name="name"
                       placeholder="Type a name"
                       register={register}
                       error={errors.name}
                     />
-                    <InputField
+                    <Input
                       label="Cost"
                       name="cost"
                       placeholder="Enter cost"
                       register={register}
                       error={errors.cost}
                     />
-                    <SelectField
+                    <Select
                       label="Type"
                       name="expenseType"
                       options={expenseTypes}
                       selected={selectedExpenseType}
                       setSelected={setSelectedExpenseType}
                     />
-                    {/* <InputField
+                    {/* <Input
                       label="Notes"
                       name="notes"
                       placeholder="Add notes to expense"
@@ -105,7 +111,7 @@ const AddExpense = () => {
                     /> */}
                   </div>
                   <button
-                    className="px-4 py-2 border font-semibold rounded-md bg-gray-500 text-gray-50 hover:bg-gray-600 hover:text-gray-200 transition duration-150 ease-linear disabled:cursor-not-allowed disabled:bg-gray-300 disabled:text-gray-900 disabled:border-gray-300 w-full md:width-auto"
+                    className="add-expense-button-submit"
                     disabled={Object.keys(errors).length > 0}
                     type="submit"
                   >
@@ -113,11 +119,9 @@ const AddExpense = () => {
                   </button>
                 </form>
                 {Object.keys(errors).length > 0 && (
-                  <div className="bg-red-200 flex flex-col p-2 rounded-md">
+                  <div className="add-expense-error">
                     {Object.values(errors).map(({ message }, idx) => (
-                      <span className="text-red-900 text-xs" key={idx}>
-                        {message}
-                      </span>
+                      <span key={idx}>{message}</span>
                     ))}
                   </div>
                 )}

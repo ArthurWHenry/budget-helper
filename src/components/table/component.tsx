@@ -11,14 +11,18 @@ import toast from "react-hot-toast";
 // Atoms
 import { dataState } from "@/atoms";
 
+// Styles
+import "./styles.css";
+
+// Types
+import { Expense, TableExpense } from "@/types";
+
 const Table = () => {
   // State
   const [data, setData] = useRecoilState<Expense[]>(dataState);
 
   // Helpers
   const columnHelper = createColumnHelper<TableExpense>();
-  const isHidden = data.length < 1;
-
   const columns = [
     columnHelper.accessor("name", {
       header: () => "Name",
@@ -41,7 +45,7 @@ const Table = () => {
       header: "",
       cell: (context: any) => (
         <button
-          className="px-2 rounded hover:bg-gray-300 duration-150 transition ease-linear bg-gray-200"
+          className="table-row-cell-remove-button"
           onClick={() => removeEntry(context.row.original.id)}
         >
           -
@@ -49,16 +53,15 @@ const Table = () => {
       ),
     }),
   ];
+  const isHidden = data.length < 1;
 
   // Handlers
-  // Define your remove entry function
   const removeEntry = (id: string) => {
     setData(data.filter((entry): boolean => entry.id !== id));
-
-    // Show success message
     toast.success("Expense removed successfully!");
   };
 
+  // Table setup
   const table = useReactTable({
     data: data as TableExpense[],
     columns,
@@ -66,20 +69,17 @@ const Table = () => {
   });
 
   return isHidden ? (
-    <div className="flex justify-center items-center">
-      <span className="text-lg text-gray-900">Enter data to see table.</span>
+    <div className="no-data">
+      <span>Enter data to see table.</span>
     </div>
   ) : (
-    <div className="w-full bg-gray-50 shadow-md border border-gray-300">
-      <table className="max-w-4xl mx-auto w-full">
-        <thead className="h-10 border-b bg-gray-200 border-gray-300 shadow">
+    <div className="table-container">
+      <table className="table">
+        <thead className="table-head">
           {table.getHeaderGroups().map((headerGroup) => (
             <tr key={headerGroup.id}>
               {headerGroup.headers.map((header) => (
-                <th
-                  key={header.id}
-                  className="text-gray-900 border border-gray-300 uppercase"
-                >
+                <th key={header.id} className="table-head-cell">
                   {header.isPlaceholder
                     ? null
                     : flexRender(
@@ -93,9 +93,9 @@ const Table = () => {
         </thead>
         <tbody>
           {table.getRowModel().rows.map((row) => (
-            <tr key={row.id} className="h-10 border">
+            <tr key={row.id} className="table-row">
               {row.getVisibleCells().map((cell) => (
-                <td key={cell.id} className="text-center border">
+                <td key={cell.id} className="table-row-cell">
                   {flexRender(cell.column.columnDef.cell, cell.getContext())}
                 </td>
               ))}

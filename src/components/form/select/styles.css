@@ -1,0 +1,32 @@
+.select-button {
+  @apply flex justify-between items-center px-4 py-2 border rounded-md bg-white text-left min-w-32 w-full;
+}
+
+.select-container {
+  @apply flex flex-col justify-center items-start w-full;
+}
+
+.select-icon {
+  @apply h-5 w-5;
+}
+
+.select-label {
+  @apply font-semibold text-gray-900;
+}
+
+.select-option {
+  @apply flex px-4 py-2 gap-2 items-center justify-between cursor-pointer select-none transition duration-150 ease-linear hover:bg-gray-500 hover:text-white;
+}
+
+.select-option-active {
+  @apply bg-gray-500 text-gray-50;
+}
+
+.select-option-inactive {
+  @apply bg-gray-50 text-gray-900;
+}
+
+.select-options {
+  @apply absolute z-50 mt-1 overflow-hidden border rounded-md bg-white shadow min-w-32 w-full;
+}
+

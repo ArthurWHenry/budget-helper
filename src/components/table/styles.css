@@ -1,0 +1,32 @@
+.no-data {
+  @apply flex justify-center items-center text-lg text-gray-900;
+}
+
+.table {
+  @apply max-w-4xl mx-auto w-full;
+}
+
+.table-container {
+  @apply w-full bg-gray-50 shadow-md border border-gray-300;
+}
+
+
+.table-head {
+  @apply h-10 border-b bg-gray-200 border-gray-300 shadow;
+}
+
+.table-head-cell {
+  @apply text-gray-900 border border-gray-300 uppercase;
+}
+
+.table-row {
+  @apply h-10 border;
+}
+
+.table-row-cell {
+  @apply text-center border;
+}
+
+.table-row-cell-remove-button {
+@apply px-2 rounded hover:bg-gray-300 duration-150 transition ease-linear bg-gray-200;
+}

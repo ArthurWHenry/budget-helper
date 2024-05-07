@@ -1,0 +1,15 @@
+.input-container {
+  @apply flex flex-col justify-center items-start w-full;
+}
+
+.input-label {
+  @apply font-semibold text-gray-900;
+}
+
+.input-field {
+  @apply rounded-md px-4 py-2 border w-full focus:outline-none focus:border-gray-900;
+}
+
+.input-field-error {
+  @apply border-red-900;
+}
