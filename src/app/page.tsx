@@ -1,4 +1,5 @@
 "use client";
+import { Fragment } from "react";
 import { RecoilRoot, useRecoilValue } from "recoil";
 import { Tab } from "@headlessui/react";
 import { Toaster } from "react-hot-toast";
@@ -12,13 +13,13 @@ import {
   AddExpense,
   Chart,
   Header,
-  SetIncome,
+  AddIncome,
   StatCard,
   Table,
 } from "@/components";
 
-// Schema
-import { Fragment } from "react";
+// Types
+import { Expense } from "@/types";
 
 function View() {
   // Selectors
@@ -31,25 +32,22 @@ function View() {
     data.reduce((acc, { cost }) => acc + cost, 0);
 
   return (
-    <div className="bg-gray-50 min-h-screen">
+    <div className="page">
       <Header />
-      <main className="flex flex-col items-center justify-start max-w-4xl mx-auto p-4">
+      <main className="main-container">
         <div className="flex flex-col justify-center items-center gap-6 w-full">
-          <div className="flex w-full gap-4 flex-col md:flex-row">
+          <div className="stat-cards">
             <StatCard title="Income" value={income} />
             <StatCard title="Leftover" value={leftover} />
           </div>
-          <SetIncome />
+          <AddIncome />
           <AddExpense />
           <Tab.Group>
-            <Tab.List className="bg-gray-200 w-full flex gap-2 justify-between items-center p-2 rounded-lg shadow-inner">
+            <Tab.List className="tab-list">
               <Tab as={Fragment}>
                 {({ selected }) => (
                   <button
-                    className={classNames(
-                      "shadow focus:outline-none w-1/2 bg-gray-50 rounded-md py-2 px-1 font-semibold transition duration-150 ease-linear hover:shadow-none text-gray-900",
-                      { "shadow-none": selected }
-                    )}
+                    className={classNames("tab", { "shadow-none": selected })}
                   >
                     Table
                   </button>
@@ -58,10 +56,7 @@ function View() {
               <Tab as={Fragment}>
                 {({ selected }) => (
                   <button
-                    className={classNames(
-                      "shadow focus:outline-none w-1/2 bg-gray-50 rounded-md py-2 px-1 font-semibold transition duration-150 ease-linear hover:shadow-none text-gray-900",
-                      { "shadow-none": selected }
-                    )}
+                    className={classNames("tab", { "shadow-none": selected })}
                   >
                     Chart
                   </button>

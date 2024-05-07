@@ -1,34 +1,28 @@
 import { memo } from "react";
 import classNames from "classnames";
 
-type InputFieldProps = {
-  isDisabled?: boolean;
-  label: string;
-  name: string;
-  placeholder: string;
-  register: any;
-  error: any;
-};
+// Styles
+import "./styles.css";
 
-const InputField: React.FC<InputFieldProps> = ({
+// Types
+import { InputProps } from "@/types";
+
+const InputField: React.FC<InputProps> = ({
   isDisabled,
   label,
   name,
   placeholder,
   register,
   error,
-}: InputFieldProps): JSX.Element => {
+}: InputProps): JSX.Element => {
   return (
-    <div className="flex flex-col justify-center align-start w-full">
-      <label className="font-semibold text-gray-900">{label}</label>
+    <div className="input-container">
+      <label className="input-label">{label}</label>
       <input
         aria-label={label}
-        className={classNames(
-          "rounded-md px-4 py-2 border focus:outline-none focus:border-gray-900",
-          {
-            "border-red-900": error,
-          }
-        )}
+        className={classNames("input-field", {
+          "input-field-error": error,
+        })}
         disabled={isDisabled}
         placeholder={placeholder}
         {...register(name)}

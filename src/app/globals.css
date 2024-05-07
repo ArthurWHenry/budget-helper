@@ -1,3 +1,23 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.main-container {
+  @apply flex flex-col items-center justify-start max-w-4xl mx-auto p-4;
+}
+
+.page {
+  @apply bg-gray-50 min-h-screen;
+}
+
+.stat-cards {
+  @apply flex w-full gap-4 flex-col md:flex-row
+}
+
+.tab {
+  @apply shadow focus:outline-none w-1/2 bg-gray-50 rounded-md py-2 px-1 font-semibold transition duration-150 ease-linear hover:shadow-none text-gray-900;
+}
+
+.tab-list {
+  @apply bg-gray-200 w-full flex gap-2 justify-between items-center p-2 rounded-lg shadow-inner;
+}
