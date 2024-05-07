@@ -8,7 +8,14 @@ import classNames from "classnames";
 import { dataState, incomeState } from "@/atoms";
 
 // Components
-import { AddExpense, Chart, SetIncome, StatCard, Table } from "@/components";
+import {
+  AddExpense,
+  Chart,
+  Header,
+  SetIncome,
+  StatCard,
+  Table,
+} from "@/components";
 
 // Schema
 import { Fragment } from "react";
@@ -24,36 +31,24 @@ function View() {
     data.reduce((acc, { cost }) => acc + cost, 0);
 
   return (
-    <div className="bg-gray-900 min-h-screen">
-      <section className="flex max-w-4xl mx-auto">
-        <h1 className="text-lg font-bold text-gray-50 p-2">💸 Budget Helper</h1>
-      </section>
-      <section className="flex justify-center max-w-4xl mx-auto">
-        <h2 className="text-2xl font-semibold text-gray-300">
-          Paycheck Planner
-        </h2>
-      </section>
+    <div className="bg-gray-50 min-h-screen">
+      <Header />
       <main className="flex flex-col items-center justify-start max-w-4xl mx-auto p-4">
         <div className="flex flex-col justify-center items-center gap-6 w-full">
-          <SetIncome />
           <div className="flex w-full gap-4 flex-col md:flex-row">
             <StatCard title="Income" value={income} />
             <StatCard title="Leftover" value={leftover} />
           </div>
-          <div>
-            <h2 className="text-2xl font-semibold text-gray-200">Expenses</h2>
-          </div>
+          <SetIncome />
           <AddExpense />
           <Tab.Group>
-            <Tab.List className="bg-gray-700 w-full flex gap-2 justify-between items-center p-2 rounded-lg">
+            <Tab.List className="bg-gray-200 w-full flex gap-2 justify-between items-center p-2 rounded-lg shadow-inner">
               <Tab as={Fragment}>
                 {({ selected }) => (
                   <button
                     className={classNames(
-                      "focus:outline-none w-1/2 rounded-md py-2 px-1 font-semibold transition duration-150 ease-linear hover:bg-gray-600 hover:text-gray-100",
-                      selected
-                        ? "bg-gray-50 text-gray-900"
-                        : "bg-gray-700 text-gray-200"
+                      "shadow focus:outline-none w-1/2 bg-gray-50 rounded-md py-2 px-1 font-semibold transition duration-150 ease-linear hover:shadow-none text-gray-900",
+                      { "shadow-none": selected }
                     )}
                   >
                     Table
@@ -64,10 +59,8 @@ function View() {
                 {({ selected }) => (
                   <button
                     className={classNames(
-                      "focus:outline-none w-1/2 rounded-md py-2 px-1 font-semibold transition duration-150 ease-linear hover:bg-gray-600 hover:text-gray-100",
-                      selected
-                        ? "bg-gray-50 text-gray-900"
-                        : "bg-gray-700 text-gray-200"
+                      "shadow focus:outline-none w-1/2 bg-gray-50 rounded-md py-2 px-1 font-semibold transition duration-150 ease-linear hover:shadow-none text-gray-900",
+                      { "shadow-none": selected }
                     )}
                   >
                     Chart

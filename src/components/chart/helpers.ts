@@ -1,11 +1,26 @@
-const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
+const COLORS = [
+  "#1f77b4", // muted blue
+  "#ff7f0e", // safety orange
+  "#2ca02c", // cooked asparagus green
+  "#d62728", // brick red
+  "#9467bd", // muted purple
+  "#8c564b", // chestnut brown
+  "#e377c2", // raspberry yogurt pink
+  "#7f7f7f", // middle gray
+  "#bcbd22", // curry yellow-green
+  "#17becf", // blue-teal
+];
 
-export function getColor(expenseType: string) {
+export function getTotalsColor(expenseType: string) {
   if (expenseType === "Need") return COLORS[0];
   if (expenseType === "Save") return COLORS[1];
   if (expenseType === "Want") return COLORS[2];
   if (expenseType === "Leftover") return COLORS[3];
   return COLORS[3];
+}
+
+export function getColor(index: number) {
+  return COLORS[index % COLORS.length];
 }
 
 export function getExpenseTypeTotals(data: Expense[]) {

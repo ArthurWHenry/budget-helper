@@ -54,16 +54,14 @@ const AddExpense = () => {
 
   //className="bg-gray-50 w-full rounded-lg"
   return (
-    <div className="w-full bg-gray-50 rounded-lg">
+    <div className="w-full bg-gray-50 rounded-lg border shadow-md border-gray-300">
       <Disclosure>
         {({ open }) => (
           <>
             <Disclosure.Button className="flex w-full justify-between items-center p-4">
-              <div>
-                <span className="text-gray-900 text-lg font-semibold">
-                  Add Expense
-                </span>
-              </div>
+              <span className="text-gray-900 text-lg font-semibold">
+                Add Expense
+              </span>
               <ChevronRightIcon
                 className={classNames("h-5 w-5 text-gray-900", {
                   "rotate-90 transform": open,
@@ -98,16 +96,16 @@ const AddExpense = () => {
                       selected={selectedExpenseType}
                       setSelected={setSelectedExpenseType}
                     />
-                    <InputField
+                    {/* <InputField
                       label="Notes"
                       name="notes"
                       placeholder="Add notes to expense"
                       register={register}
                       error={errors.notes}
-                    />
+                    /> */}
                   </div>
                   <button
-                    className="px-4 py-2 border font-semibold rounded-md bg-gray-900 text-gray-50 hover:bg-gray-50 hover:text-gray-900 transition duration-150 ease-linear disabled:cursor-not-allowed disabled:bg-gray-300 disabled:text-gray-900 disabled:border-gray-300 w-full md:width-auto"
+                    className="px-4 py-2 border font-semibold rounded-md bg-gray-500 text-gray-50 hover:bg-gray-600 hover:text-gray-200 transition duration-150 ease-linear disabled:cursor-not-allowed disabled:bg-gray-300 disabled:text-gray-900 disabled:border-gray-300 w-full md:width-auto"
                     disabled={Object.keys(errors).length > 0}
                     type="submit"
                   >
