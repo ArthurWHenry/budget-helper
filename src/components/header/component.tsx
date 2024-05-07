@@ -1,11 +1,12 @@
 import { memo } from "react";
 
+// Styles
+import "./styles.css";
+
 const Header: React.FC = () => {
   return (
-    <nav className="flex max-w-4xl mx-auto">
-      <h1 className="text-lg font-bold text-gray-900 py-4 px-2">
-        💸 Budget Helper
-      </h1>
+    <nav className="nav-container">
+      <h1 className="nav-title">💸 Budget Helper</h1>
     </nav>
   );
 };

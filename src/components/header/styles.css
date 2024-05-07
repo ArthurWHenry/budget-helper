@@ -1,0 +1,7 @@
+.nav-container {
+  @apply flex max-w-4xl mx-auto;
+}
+
+.nav-title {
+  @apply text-lg font-bold text-gray-900 py-4 px-2;
+}

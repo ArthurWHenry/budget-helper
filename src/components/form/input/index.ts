@@ -1,2 +1,2 @@
-import InputField from "./component";
-export { InputField };
+import Input from "./component";
+export { Input };

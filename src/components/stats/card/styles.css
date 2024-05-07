@@ -1,0 +1,11 @@
+.stat-container {
+  @apply flex flex-col justify-center items-center p-4 gap-2 w-full border-2 rounded-lg shadow-md;
+}
+
+.stat-title {
+  @apply font-semibold text-lg text-gray-700;
+}
+
+.stat-value {
+  @apply text-3xl font-bold;
+}

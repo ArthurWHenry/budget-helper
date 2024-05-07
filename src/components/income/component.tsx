@@ -8,12 +8,15 @@ import { ChevronRightIcon } from "@heroicons/react/24/solid";
 import { incomeState } from "@/atoms";
 
 // Components
-import { Form, InputField } from "@/components";
+import { Form, Input } from "@/components";
 
 // Schema
 import { setIncomeSchema } from "@/schema";
 
-const SetIncome: React.FC = () => {
+// Styles
+import "./styles.css";
+
+const AddIncome: React.FC = () => {
   // State
   const setIncome: SetterOrUpdater<number> = useSetRecoilState(incomeState);
 
@@ -23,39 +26,34 @@ const SetIncome: React.FC = () => {
   };
 
   return (
-    <div className="w-full border rounded-lg shadow-md border-gray-300">
+    <div className="add-income-container">
       <Disclosure>
         {({ open }) => (
           <>
-            <Disclosure.Button className="flex w-full justify-between items-center p-4">
-              <span className="text-gray-900 text-lg font-semibold">
-                Income
-              </span>
+            <Disclosure.Button className="add-income-button">
+              <span className="add-income-button-text">Add Income</span>
               <ChevronRightIcon
                 className={classNames("h-5 w-5 text-gray-900", {
                   "rotate-90 transform": open,
                 })}
               />
             </Disclosure.Button>
-            <Disclosure.Panel className="border-t rounded-b-lg w-full pb-4 px-4 pt-2">
+            <Disclosure.Panel className="add-income-panel">
               <Form
-                classes="flex flex-col gap-2 bg-gray-50"
+                classes="set-income-form"
                 handleSubmit={onSubmitIncome}
                 schema={setIncomeSchema}
               >
                 {({ register, formState }: any): JSX.Element => (
                   <>
-                    <InputField
+                    <Input
                       label="Amount"
                       name="income"
                       placeholder="Enter paycheck amount"
                       register={register}
                       error={formState.errors.income}
                     />
-                    <button
-                      className="px-4 py-2 border font-semibold rounded-md bg-gray-500 text-gray-50 hover:bg-gray-600 hover:text-gray-200 transition duration-150 ease-linear disabled:cursor-not-allowed disabled:bg-gray-300 disabled:text-gray-900 disabled:border-gray-300 w-full md:width-auto"
-                      type="submit"
-                    >
+                    <button className="set-income-button" type="submit">
                       Set Amount
                     </button>
                   </>
@@ -69,4 +67,4 @@ const SetIncome: React.FC = () => {
   );
 };
 
-export default memo(SetIncome);
+export default memo(AddIncome);

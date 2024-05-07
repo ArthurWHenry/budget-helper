@@ -1,4 +1,4 @@
-import { Dispatch, Fragment, memo, SetStateAction, useState } from "react";
+import { Fragment, memo } from "react";
 import { Listbox, Transition } from "@headlessui/react";
 import {
   CheckIcon,
@@ -7,36 +7,38 @@ import {
 } from "@heroicons/react/20/solid";
 import classNames from "classnames";
 
-type SelectFieldProps = {
-  isDisabled?: boolean;
-  label: string;
-  name: string;
-  options: any[];
-  selected: { label: string; value: number };
-  setSelected: Dispatch<SetStateAction<{ label: string; value: number }>>;
-};
+// Styles
+import "./styles.css";
 
-const SelectField: React.FC<SelectFieldProps> = ({
+// Types
+import { SelectProps } from "@/types";
+
+const Select: React.FC<SelectProps> = ({
   selected,
   setSelected,
   isDisabled,
   label,
   name,
   options,
-}: SelectFieldProps): JSX.Element => {
+}: SelectProps): JSX.Element => {
   return (
-    <div className="flex flex-col justify-center align-start w-full">
-      <Listbox value={selected} onChange={setSelected}>
+    <div className="select-container">
+      <Listbox
+        disabled={isDisabled}
+        name={name}
+        onChange={setSelected}
+        value={selected}
+      >
         {({ open }) => (
           <div className="relative w-full">
-            <label className="font-semibold text-gray-900">{label}</label>
-            <Listbox.Button className="flex justify-between items-center px-4 py-2 border rounded-md bg-white text-left min-w-32 w-full">
+            <label className="select-label">{label}</label>
+            <Listbox.Button className="select-button">
               {selected.label}
-              {open ? (
-                <ChevronUpIcon className="h-5 w-5" />
-              ) : (
-                <ChevronDownIcon className="h-5 w-5" />
-              )}
+              <ChevronDownIcon
+                className={classNames("h-5 w-5 text-gray-900", {
+                  "rotate-180 transform": open,
+                })}
+              />
             </Listbox.Button>
             <Transition
               as={Fragment}
@@ -44,7 +46,7 @@ const SelectField: React.FC<SelectFieldProps> = ({
               leaveFrom="opacity-100"
               leaveTo="opacity-0"
             >
-              <Listbox.Options className="absolute z-50 mt-1 overflow-hidden border rounded-md bg-white shadow min-w-32 w-full">
+              <Listbox.Options className="select-options">
                 {options.map((option) => (
                   <Listbox.Option
                     key={option.value}
@@ -54,14 +56,14 @@ const SelectField: React.FC<SelectFieldProps> = ({
                     {({ active, selected }) => (
                       <li
                         className={classNames(
-                          "flex px-4 py-2 gap-2 items-center justify-between cursor-pointer select-none transition duration-150 ease-linear hover:bg-gray-500 hover:text-white",
+                          "select-option",
                           active
-                            ? "bg-gray-500 text-gray-0"
-                            : "bg-gray-50 text-gray-900"
+                            ? "select-option-active"
+                            : "select-option-inactive"
                         )}
                       >
                         {option.label}
-                        {selected && <CheckIcon className="h-5 w-5" />}
+                        {selected && <CheckIcon className="select-icon" />}
                       </li>
                     )}
                   </Listbox.Option>
@@ -75,4 +77,4 @@ const SelectField: React.FC<SelectFieldProps> = ({
   );
 };
 
-export default memo(SelectField);
+export default memo(Select);

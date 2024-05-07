@@ -1,0 +1,19 @@
+.chart-change-view-button {
+  @apply bg-gray-200 px-4 py-2 rounded-md text-gray-800 font-semibold transition duration-150 ease-linear hover:bg-gray-300;
+}
+
+.chart-container {
+  @apply flex justify-center items-center flex-col gap-2;
+}
+
+.chart-custom-tooltip {
+  @apply bg-gray-50 rounded-lg shadow p-2 border;
+}
+
+.chart-responsive-container {
+  @apply w-full h-80 min-h-80;
+}
+
+.no-data {
+  @apply flex justify-center items-center text-lg text-gray-900;
+}
