@@ -38,6 +38,7 @@ const AddExpense = () => {
   });
 
   // State
+  const [isOpen, setIsOpen] = useState<boolean>(false);
   const [data, setData] = useRecoilState(dataState);
   const [selectedExpenseType, setSelectedExpenseType] = useState({
     label: "Need",
@@ -62,11 +63,16 @@ const AddExpense = () => {
   };
 
   return (
-    <div className="add-expense-container">
+    <div
+      className={classNames("add-expense-container", { "shadow-md": !isOpen })}
+    >
       <Disclosure>
         {({ open }) => (
           <>
-            <Disclosure.Button className="add-expense-button">
+            <Disclosure.Button
+              className="add-expense-button"
+              onClick={(): void => setIsOpen(!isOpen)}
+            >
               <span className="add-expense-button-text">Add Expense</span>
               <ChevronRightIcon
                 className={classNames("h-5 w-5 text-gray-900", {

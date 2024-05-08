@@ -24,3 +24,14 @@ export const dataState: RecoilState<Expense[]> = atom({
   key: "data",
   default: [] as Expense[],
 });
+
+/**
+ * View totals state.
+ *
+ * @type {RecoilState<boolean>}
+ * @remarks This state is used to toggle the view of the totals.
+ */
+export const viewTotalsState: RecoilState<boolean> = atom({
+  key: "viewTotals",
+  default: false,
+});

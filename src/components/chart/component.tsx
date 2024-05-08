@@ -1,5 +1,5 @@
 import { memo, useState } from "react";
-import { useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import {
   Cell,
   Legend,
@@ -8,11 +8,11 @@ import {
   ResponsiveContainer,
   Tooltip,
 } from "recharts";
-
 // Atoms
-import { dataState, incomeState } from "@/atoms";
+import { dataState, incomeState, viewTotalsState } from "@/atoms";
 
 // Components
+import { ExportAction, ImportAction, ViewAction } from "@/components";
 import { CustomLabel } from "./components";
 
 // Helpers
@@ -27,12 +27,10 @@ import {
 import "./styles.css";
 
 const Chart = () => {
-  // State
-  const [viewTotals, setViewTotals] = useState<boolean>(false);
-
   // Selectors
   const data = useRecoilValue(dataState);
   const income = useRecoilValue(incomeState);
+  const viewTotals: boolean = useRecoilValue<boolean>(viewTotalsState);
 
   // Helpers
   const isHidden = data.length < 1;
@@ -61,69 +59,70 @@ const Chart = () => {
     },
   ];
 
-  return isHidden ? (
-    <div className="no-data">
-      <span>Enter data to see chart.</span>
-    </div>
-  ) : (
-    <div className="chart-container">
-      <ResponsiveContainer
-        height="100%"
-        width="100%"
-        className="chart-responsive-container"
-      >
-        <PieChart>
-          <Pie
-            data={viewTotals ? finalTotalsChartData : finalsSortedChartData}
-            dataKey="cost"
-            nameKey="name"
-            outerRadius={80}
-            fill="#8884d8"
-            label={(data): JSX.Element => <CustomLabel {...data} />}
-            labelLine={false}
-          >
-            {viewTotals
-              ? chartData.map((entry, index: number) => {
-                  return (
-                    <Cell
-                      key={`cell-${index}`}
-                      fill={getTotalsColor(entry.name)}
-                    />
-                  );
-                })
-              : data.map((_, index: number) => {
-                  return <Cell key={`cell-${index}`} fill={getColor(index)} />;
-                })}
-          </Pie>
-          <Tooltip
-            content={({ active, payload }): JSX.Element | null => {
-              if (active && payload && payload.length) {
-                return (
-                  <div className="chart-custom-tooltip">
-                    <p>
-                      {`${
-                        payload[0].name
-                      } : $${payload[0].value?.toLocaleString()}`}
-                    </p>
-                  </div>
-                );
-              }
-              return null;
-            }}
-          />
-          <Legend iconSize={6} iconType="circle" />
-        </PieChart>
-      </ResponsiveContainer>
-      <div className="flex justify-center items-center">
-        <button
-          className="chart-change-view-button"
-          onClick={() => setViewTotals(!viewTotals)}
-        >
-          {viewTotals ? "Hide Totals" : "View Totals"}
-        </button>
+  return (
+    <>
+      <div className="chart-actions">
+        <ExportAction />
+        <ImportAction />
+        <ViewAction />
       </div>
-      {/* Add a color picker for users to use to help decorate their chart. */}
-    </div>
+      {isHidden ? (
+        <div className="no-data">
+          <span>Enter data to see chart.</span>
+        </div>
+      ) : (
+        <div className="chart-container">
+          <ResponsiveContainer
+            height="100%"
+            width="100%"
+            className="chart-responsive-container"
+          >
+            <PieChart>
+              <Pie
+                data={viewTotals ? finalTotalsChartData : finalsSortedChartData}
+                dataKey="cost"
+                nameKey="name"
+                fill="#8884d8"
+                label={(data): JSX.Element => <CustomLabel {...data} />}
+                labelLine={false}
+              >
+                {viewTotals
+                  ? chartData.map((entry, index: number) => {
+                      return (
+                        <Cell
+                          key={`cell-${index}`}
+                          fill={getTotalsColor(entry.name)}
+                        />
+                      );
+                    })
+                  : data.map((_, index: number) => {
+                      return (
+                        <Cell key={`cell-${index}`} fill={getColor(index)} />
+                      );
+                    })}
+              </Pie>
+              <Tooltip
+                content={({ active, payload }): JSX.Element | null => {
+                  if (active && payload && payload.length) {
+                    return (
+                      <div className="chart-custom-tooltip">
+                        <p>
+                          {`${
+                            payload[0].name
+                          } : $${payload[0].value?.toLocaleString()}`}
+                        </p>
+                      </div>
+                    );
+                  }
+                  return null;
+                }}
+              />
+              <Legend iconSize={6} iconType="circle" />
+            </PieChart>
+          </ResponsiveContainer>
+        </div>
+      )}
+    </>
   );
 };
 
