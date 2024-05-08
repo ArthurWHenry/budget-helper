@@ -3,7 +3,7 @@ import { useRecoilValue } from "recoil";
 import Papa from "papaparse";
 import { saveAs } from "file-saver";
 import classNames from "classnames";
-import { ArrowDownTrayIcon } from "@heroicons/react/24/solid";
+import { ArrowUpTrayIcon } from "@heroicons/react/24/solid";
 
 // Atoms
 import { dataState } from "@/atoms";
@@ -40,7 +40,7 @@ const ExportAction: React.FC = () => {
       onClick={handleCSVExport}
       title="Export CSV file"
     >
-      <ArrowDownTrayIcon className="button-icon" />
+      <ArrowUpTrayIcon className="button-icon" />
     </button>
   );
 };

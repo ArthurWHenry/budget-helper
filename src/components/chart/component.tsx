@@ -68,7 +68,7 @@ const Chart = () => {
       </div>
       {isHidden ? (
         <div className="no-data">
-          <span>Enter data to see chart.</span>
+          <span>Import or add data to see the chart.</span>
         </div>
       ) : (
         <div className="flex justify-center items-center">
