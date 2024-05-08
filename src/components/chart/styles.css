@@ -10,10 +10,6 @@
   @apply bg-gray-50 rounded-lg shadow p-2 border;
 }
 
-.chart-responsive-container {
-  @apply w-full min-h-52 h-auto;
-}
-
 .no-data {
   @apply flex justify-center items-center text-lg text-gray-900;
 }
