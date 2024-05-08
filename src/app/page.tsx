@@ -1,7 +1,7 @@
 "use client";
 import { Fragment } from "react";
-import { RecoilRoot, useRecoilState, useRecoilValue } from "recoil";
-import { Toast, Toaster } from "react-hot-toast";
+import { RecoilRoot, useRecoilValue } from "recoil";
+import { Toaster } from "react-hot-toast";
 import { Tab } from "@headlessui/react";
 import classNames from "classnames";
 

@@ -1,10 +1,9 @@
 import { ChangeEvent, memo } from "react";
-import { SetterOrUpdater, useRecoilState, useSetRecoilState } from "recoil";
+import { SetterOrUpdater, useSetRecoilState } from "recoil";
 import toast from "react-hot-toast";
 import Papa from "papaparse";
 import { v4 as uuidv4 } from "uuid";
-import classNames from "classnames";
-import { ArrowUpTrayIcon } from "@heroicons/react/24/solid";
+import { ArrowDownTrayIcon } from "@heroicons/react/24/solid";
 
 // Atoms
 import { dataState } from "@/atoms";
@@ -95,7 +94,7 @@ const ImportAction: React.FC = () => {
         htmlFor="csv-import"
         title="Import CSV file"
       >
-        <ArrowUpTrayIcon className="button-icon" />
+        <ArrowDownTrayIcon className="button-icon" />
       </label>
     </div>
   );

@@ -83,7 +83,7 @@ const Table = () => {
       </div>
       {isHidden ? (
         <div className="no-data">
-          <span>Enter data to see table.</span>
+          <span>Import or add data to see the table.</span>
         </div>
       ) : (
         <div className="table-container">
