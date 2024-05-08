@@ -11,7 +11,7 @@
 }
 
 .chart-responsive-container {
-  @apply w-full h-80 min-h-80;
+  @apply w-full min-h-52 h-auto;
 }
 
 .no-data {

@@ -7,11 +7,11 @@
 }
 
 .table-actions {
-  @apply w-full flex justify-end items-center gap-2 mt-6;
+  @apply w-full flex justify-end items-center gap-2 mt-6 border p-2 rounded-lg bg-gray-100 shadow-sm;
 }
 
 .table-container {
-  @apply w-full bg-gray-50 shadow-md border border-gray-300;
+  @apply w-full bg-gray-50 shadow-sm ;
 }
 
 .table-export-button {
@@ -23,7 +23,7 @@
 }
 
 .table-head {
-  @apply h-10 border-b bg-gray-200 border-gray-300 shadow;
+  @apply h-10 border-b bg-gray-200 border-gray-300;
 }
 
 .table-head-cell {

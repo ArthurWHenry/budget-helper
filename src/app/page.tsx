@@ -1,7 +1,7 @@
 "use client";
 import { Fragment } from "react";
 import { RecoilRoot, useRecoilState, useRecoilValue } from "recoil";
-import { Toaster } from "react-hot-toast";
+import { Toast, Toaster } from "react-hot-toast";
 import { Tab } from "@headlessui/react";
 import classNames from "classnames";
 
@@ -18,11 +18,12 @@ import {
   Table,
 } from "@/components";
 
-function View() {
-  // State
-  const [data, setData] = useRecoilState(dataState);
+// Type
+import { Expense } from "@/types";
 
+function View() {
   // Selectors
+  const data: Expense[] = useRecoilValue(dataState);
   const income: number = useRecoilValue(incomeState);
 
   // Helpers
@@ -80,7 +81,7 @@ function View() {
 export default function Home() {
   return (
     <RecoilRoot>
-      <Toaster position="top-right" />
+      <Toaster position="top-center" />
       <View />
     </RecoilRoot>
   );

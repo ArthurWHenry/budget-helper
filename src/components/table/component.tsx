@@ -35,6 +35,7 @@ const Table = () => {
     columnHelper.accessor("name", {
       header: () => "Name",
       cell: (info) => info.getValue(),
+      // size: 100,
     }),
     columnHelper.accessor("cost", {
       header: () => "Cost",
@@ -42,13 +43,13 @@ const Table = () => {
         const costValue = cost.getValue();
         return <span>${costValue.toLocaleString()}</span>;
       },
+      size: 50,
+      maxSize: 75,
     }),
     columnHelper.accessor("expenseType", {
       header: () => <span>Type</span>,
+      size: 50,
     }),
-    // columnHelper.accessor("notes", {
-    //   header: "Notes",
-    // }),
     columnHelper.accessor("remove", {
       header: "",
       cell: (context: any) => (
@@ -59,6 +60,7 @@ const Table = () => {
           -
         </button>
       ),
+      size: 15,
     }),
   ];
   const isHidden = data.length < 1;
@@ -162,7 +164,13 @@ const Table = () => {
               {table.getHeaderGroups().map((headerGroup) => (
                 <tr key={headerGroup.id}>
                   {headerGroup.headers.map((header) => (
-                    <th key={header.id} className="table-head-cell">
+                    <th
+                      key={header.id}
+                      className="table-head-cell"
+                      style={{
+                        width: header.column.getSize(),
+                      }}
+                    >
                       {header.isPlaceholder
                         ? null
                         : flexRender(

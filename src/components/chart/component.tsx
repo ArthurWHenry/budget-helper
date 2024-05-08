@@ -77,7 +77,6 @@ const Chart = () => {
             data={viewTotals ? finalTotalsChartData : finalsSortedChartData}
             dataKey="cost"
             nameKey="name"
-            outerRadius={80}
             fill="#8884d8"
             label={(data): JSX.Element => <CustomLabel {...data} />}
             labelLine={false}
