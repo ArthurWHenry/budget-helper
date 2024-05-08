@@ -19,7 +19,7 @@
 }
 
 .tab {
-  @apply shadow focus:outline-none w-1/2 bg-gray-50 rounded-md py-2 px-1 font-semibold transition duration-150 ease-linear hover:shadow-none text-gray-900;
+  @apply focus:outline-none w-1/2 bg-gray-50 rounded-md py-2 px-1 font-semibold transition duration-150 ease-linear hover:shadow-none text-gray-900;
 }
 
 .tab-list {

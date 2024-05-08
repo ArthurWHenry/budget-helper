@@ -47,7 +47,10 @@ function View() {
               <Tab as={Fragment}>
                 {({ selected }) => (
                   <button
-                    className={classNames("tab", { "shadow-none": selected })}
+                    className={classNames(
+                      "tab",
+                      selected ? "shadow-none" : "shadow-md"
+                    )}
                   >
                     Table
                   </button>
@@ -56,7 +59,10 @@ function View() {
               <Tab as={Fragment}>
                 {({ selected }) => (
                   <button
-                    className={classNames("tab", { "shadow-none": selected })}
+                    className={classNames(
+                      "tab",
+                      selected ? "shadow-none" : "shadow-md"
+                    )}
                   >
                     Chart
                   </button>
