@@ -71,11 +71,12 @@ const Chart = () => {
           <span>Enter data to see chart.</span>
         </div>
       ) : (
-        <div className="chart-container">
+        <div className="flex justify-center items-center">
           <ResponsiveContainer
             height="100%"
             width="100%"
-            className="chart-responsive-container"
+            className="overflow-visible"
+            aspect={2}
           >
             <PieChart>
               <Pie
@@ -83,6 +84,7 @@ const Chart = () => {
                 dataKey="cost"
                 nameKey="name"
                 fill="#8884d8"
+                outerRadius="50%"
                 label={(data): JSX.Element => <CustomLabel {...data} />}
                 labelLine={false}
               >
@@ -117,7 +119,6 @@ const Chart = () => {
                   return null;
                 }}
               />
-              <Legend iconSize={6} iconType="circle" />
             </PieChart>
           </ResponsiveContainer>
         </div>
