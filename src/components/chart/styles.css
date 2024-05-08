@@ -1,5 +1,5 @@
-.chart-change-view-button {
-  @apply bg-gray-200 px-4 py-2 rounded-md text-gray-800 font-semibold transition duration-150 ease-linear hover:bg-gray-300;
+.chart-actions {
+  @apply w-full flex justify-end items-center gap-2 mb-6 ;
 }
 
 .chart-container {
@@ -11,7 +11,7 @@
 }
 
 .chart-responsive-container {
-  @apply w-full h-80 min-h-80;
+  @apply w-full min-h-52 h-auto;
 }
 
 .no-data {

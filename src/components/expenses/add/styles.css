@@ -11,14 +11,12 @@
 }
 
 .add-expense-container {
-  @apply w-full bg-gray-50 rounded-lg border shadow-md border-gray-300;
+  @apply w-full bg-gray-50 rounded-lg border border-gray-300;
 }
-
 
 .add-expense-form {
   @apply flex flex-col gap-2 w-full;
 }
-
 
 .add-expense-form-container {
   @apply flex pt-2 flex-col md:flex-row justify-between items-end gap-2 w-full;
