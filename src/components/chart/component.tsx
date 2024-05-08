@@ -1,5 +1,5 @@
 import { memo, useState } from "react";
-import { useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import {
   Cell,
   Legend,
@@ -8,14 +8,11 @@ import {
   ResponsiveContainer,
   Tooltip,
 } from "recharts";
-import classNames from "classnames";
-import { ChartPieIcon as ChartPieIconSolid } from "@heroicons/react/24/solid";
-import { ChartPieIcon as ChartPieIconOutline } from "@heroicons/react/24/outline";
-
 // Atoms
-import { dataState, incomeState } from "@/atoms";
+import { dataState, incomeState, viewTotalsState } from "@/atoms";
 
 // Components
+import { ExportAction, ImportAction, ViewAction } from "@/components";
 import { CustomLabel } from "./components";
 
 // Helpers
@@ -30,12 +27,10 @@ import {
 import "./styles.css";
 
 const Chart = () => {
-  // State
-  const [viewTotals, setViewTotals] = useState<boolean>(false);
-
   // Selectors
   const data = useRecoilValue(dataState);
   const income = useRecoilValue(incomeState);
+  const viewTotals: boolean = useRecoilValue<boolean>(viewTotalsState);
 
   // Helpers
   const isHidden = data.length < 1;
@@ -67,21 +62,9 @@ const Chart = () => {
   return (
     <>
       <div className="chart-actions">
-        <button
-          className={classNames("chart-change-view-button", {
-            "transition duration-150 ease-linear hover:bg-gray-600 hover:text-gray-100":
-              data.length > 0,
-          })}
-          disabled={data.length === 0}
-          onClick={() => setViewTotals(!viewTotals)}
-          title="View Totals"
-        >
-          {viewTotals ? (
-            <ChartPieIconSolid className="button-icon" />
-          ) : (
-            <ChartPieIconOutline className="button-icon" />
-          )}
-        </button>
+        <ExportAction />
+        <ImportAction />
+        <ViewAction />
       </div>
       {isHidden ? (
         <div className="no-data">
