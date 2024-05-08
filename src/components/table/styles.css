@@ -7,7 +7,7 @@
 }
 
 .table-actions {
-  @apply w-full flex justify-end items-center gap-2 mt-6 border p-2 rounded-lg bg-gray-100 shadow-sm;
+  @apply w-full flex justify-end items-center gap-2 mb-6 ;
 }
 
 .table-container {

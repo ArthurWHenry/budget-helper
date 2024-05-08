@@ -153,6 +153,35 @@ const Table = () => {
 
   return (
     <>
+      <div className="table-actions">
+        <button
+          className={classNames("table-export-button", {
+            "transition duration-150 ease-linear hover:bg-gray-600 hover:text-gray-100":
+              data.length > 0,
+          })}
+          disabled={data.length === 0}
+          onClick={handleCSVExport}
+          title="Export CSV file"
+        >
+          <ArrowDownTrayIcon className="button-icon" />
+        </button>
+        <div className="flex">
+          <input
+            id="csv-import"
+            type="file"
+            accept=".csv"
+            onChange={handleCSVImport}
+            className="hidden"
+          />
+          <label
+            className={classNames("table-import-button")}
+            htmlFor="csv-import"
+            title="Import CSV file"
+          >
+            <ArrowUpTrayIcon className="button-icon" />
+          </label>
+        </div>
+      </div>
       {isHidden ? (
         <div className="no-data">
           <span>Enter data to see table.</span>
@@ -199,33 +228,6 @@ const Table = () => {
           </table>
         </div>
       )}
-      <div className="table-actions">
-        <button
-          className={classNames("table-export-button", {
-            "transition duration-150 ease-linear hover:bg-gray-600 hover:text-gray-100":
-              data.length > 0,
-          })}
-          disabled={data.length === 0}
-          onClick={handleCSVExport}
-        >
-          <ArrowDownTrayIcon className="button-icon" />
-        </button>
-        <div className="flex">
-          <input
-            id="csv-import"
-            type="file"
-            accept=".csv"
-            onChange={handleCSVImport}
-            className="hidden"
-          />
-          <label
-            className={classNames("table-import-button")}
-            htmlFor="csv-import"
-          >
-            <ArrowUpTrayIcon className="button-icon" />
-          </label>
-        </div>
-      </div>
     </>
   );
 };
