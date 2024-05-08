@@ -22,19 +22,21 @@ const ViewAction: React.FC = () => {
 
   return (
     <button
-      className={classNames("chart-change-view-action-button", {
-        "transition duration-150 ease-linear hover:bg-gray-600 hover:text-gray-100":
-          data.length > 0,
-      })}
+      className={classNames(
+        "chart-change-view-action-button",
+        {
+          "transition duration-150 ease-linear hover:bg-gray-600 hover:text-gray-100":
+            data.length > 0,
+        },
+        viewTotals
+          ? "bg-gray-300 text-gray-500 shadow-none"
+          : "bg-gray-500 text-gray-50 shadow"
+      )}
       disabled={data.length === 0}
       onClick={() => setViewTotals(!viewTotals)}
       title="View Totals"
     >
-      {viewTotals ? (
-        <ChartPieIconSolid className="button-icon" />
-      ) : (
-        <ChartPieIconOutline className="button-icon" />
-      )}
+      <ChartPieIconOutline className={classNames("button-icon")} />
     </button>
   );
 };
