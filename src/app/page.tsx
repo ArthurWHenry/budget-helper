@@ -1,8 +1,8 @@
 "use client";
 import { Fragment } from "react";
-import { RecoilRoot, useRecoilValue } from "recoil";
-import { Tab } from "@headlessui/react";
+import { RecoilRoot, useRecoilState, useRecoilValue } from "recoil";
 import { Toaster } from "react-hot-toast";
+import { Tab } from "@headlessui/react";
 import classNames from "classnames";
 
 // Atoms
@@ -18,12 +18,11 @@ import {
   Table,
 } from "@/components";
 
-// Types
-import { Expense } from "@/types";
-
 function View() {
+  // State
+  const [data, setData] = useRecoilState(dataState);
+
   // Selectors
-  const data: Expense[] = useRecoilValue(dataState);
   const income: number = useRecoilValue(incomeState);
 
   // Helpers

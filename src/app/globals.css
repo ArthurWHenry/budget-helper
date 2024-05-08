@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+.button-icon {
+  @apply h-5 w-5;
+}
+
 .main-container {
   @apply flex flex-col items-center justify-start max-w-4xl mx-auto p-4;
 }

@@ -17,7 +17,7 @@ export const addExpenseSchema = yup.object().shape({
   notes: yup.string().max(160, "Name must be less than 25 characters."),
 });
 
-export const setIncomeSchema = yup.object().shape({
+export const addIncomeSchema = yup.object().shape({
   income: yup
     .number()
     .min(0, "Income must be greater than or equal to 0.")
