@@ -1,5 +1,7 @@
 import { memo } from "react";
 import { SetterOrUpdater, useSetRecoilState } from "recoil";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
 import classNames from "classnames";
 import { Disclosure } from "@headlessui/react";
 import { ChevronRightIcon } from "@heroicons/react/24/solid";
@@ -8,21 +10,34 @@ import { ChevronRightIcon } from "@heroicons/react/24/solid";
 import { incomeState } from "@/atoms";
 
 // Components
-import { Form, Input } from "@/components";
+import { Input } from "@/components";
 
 // Schema
-import { setIncomeSchema } from "@/schema";
+import { addIncomeSchema } from "@/schema";
 
 // Styles
 import "./styles.css";
 
 const AddIncome: React.FC = () => {
+  // Hooks
+  const {
+    formState: { errors },
+    handleSubmit,
+    register,
+    resetField,
+  } = useForm({
+    resolver: yupResolver(addIncomeSchema),
+  });
+
   // State
   const setIncome: SetterOrUpdater<number> = useSetRecoilState(incomeState);
 
   // Handlers
   const onSubmitIncome = ({ income }: { income: number }) => {
     setIncome(income);
+
+    // Resetting fields.
+    resetField("income");
   };
 
   return (
@@ -39,26 +54,21 @@ const AddIncome: React.FC = () => {
               />
             </Disclosure.Button>
             <Disclosure.Panel className="add-income-panel">
-              <Form
-                classes="set-income-form"
-                handleSubmit={onSubmitIncome}
-                schema={setIncomeSchema}
+              <form
+                className="set-income-form"
+                onSubmit={handleSubmit(onSubmitIncome)}
               >
-                {({ register, formState }: any): JSX.Element => (
-                  <>
-                    <Input
-                      label="Amount"
-                      name="income"
-                      placeholder="Enter paycheck amount"
-                      register={register}
-                      error={formState.errors.income}
-                    />
-                    <button className="set-income-button" type="submit">
-                      Set Amount
-                    </button>
-                  </>
-                )}
-              </Form>
+                <Input
+                  label="Amount"
+                  name="income"
+                  placeholder="Enter paycheck amount"
+                  register={register}
+                  error={errors.income}
+                />
+                <button className="set-income-button" type="submit">
+                  Set Amount
+                </button>
+              </form>
             </Disclosure.Panel>
           </>
         )}
