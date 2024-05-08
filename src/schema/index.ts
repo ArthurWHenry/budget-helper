@@ -3,12 +3,8 @@ import * as yup from "yup";
 export const addExpenseSchema = yup.object().shape({
   name: yup
     .string()
-    .matches(
-      /^[a-zA-Z0-9 ]*$/,
-      "Name can only contain alphanumeric characters."
-    )
     .required("Name field is required.")
-    .max(25, "Name must be less than 25 characters."),
+    .max(60, "Name must be less than 60 characters."),
   cost: yup
     .number()
     .typeError("Cost must be of number value.")
