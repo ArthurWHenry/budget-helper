@@ -33,6 +33,7 @@ const AddExpense = () => {
     handleSubmit,
     register,
     resetField,
+    setValue,
   } = useForm({
     resolver: yupResolver(addExpenseSchema),
   });
@@ -49,13 +50,18 @@ const AddExpense = () => {
   const onSubmitExpense: SubmitHandler<ExpenseSchema> = (newData) => {
     setData([
       ...data,
-      { ...newData, id: uuidv4(), expenseType: selectedExpenseType.label },
+      {
+        ...newData,
+        id: uuidv4(),
+        expenseType: selectedExpenseType.label,
+      },
     ]);
 
     // Resetting fields.
     resetField("name");
     resetField("cost");
-    resetField("notes");
+    resetField("date");
+    setValue("date", new Date().toISOString().split("T")[0] as any);
     setSelectedExpenseType({ label: "Need", value: 0 });
 
     // Success message
@@ -108,13 +114,16 @@ const AddExpense = () => {
                       selected={selectedExpenseType}
                       setSelected={setSelectedExpenseType}
                     />
-                    {/* <Input
-                      label="Notes"
-                      name="notes"
-                      placeholder="Add notes to expense"
-                      register={register}
-                      error={errors.notes}
-                    /> */}
+                    <div className="flex flex-col justify-center items-start w-full">
+                      <label className="font-semibold">Date</label>
+                      <input
+                        className="w-full p-2 rounded-md border border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-900 focus:border-transparent"
+                        defaultValue={new Date().toISOString().split("T")[0]}
+                        min={new Date().toISOString().split("T")[0]}
+                        type="date"
+                        {...register("date")}
+                      />
+                    </div>
                   </div>
                   <button
                     className="add-expense-button-submit"

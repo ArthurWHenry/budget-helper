@@ -61,11 +61,12 @@ const ImportAction: React.FC = () => {
           }));
 
           // Checking that data is valid.
-          addUUID.every(({ name, cost, expenseType }: any) => {
+          addUUID.every(({ name, cost, expenseType, date }: any) => {
             if (
               typeof name !== "string" ||
               typeof cost !== "number" ||
-              typeof expenseType !== "string"
+              typeof expenseType !== "string" ||
+              typeof date !== "string"
             ) {
               throw new Error("Invalid data.");
             }

@@ -12,7 +12,12 @@ import {
 import { dataState, incomeState, viewTotalsState } from "@/atoms";
 
 // Components
-import { ExportAction, ImportAction, ViewAction } from "@/components";
+import {
+  ClearAction,
+  ExportAction,
+  ImportAction,
+  ViewAction,
+} from "@/components";
 import { CustomLabel } from "./components";
 
 // Helpers
@@ -65,6 +70,7 @@ const Chart = () => {
         <ExportAction />
         <ImportAction />
         <ViewAction />
+        <ClearAction />
       </div>
       {isHidden ? (
         <div className="no-data">

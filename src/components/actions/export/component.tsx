@@ -20,10 +20,11 @@ const ExportAction: React.FC = () => {
 
   const handleCSVExport = () => {
     const csv = Papa.unparse(
-      data.map(({ name, cost, expenseType }) => ({
+      data.map(({ name, cost, expenseType, date }) => ({
         NAME: name,
         COST: cost,
         "EXPENSE TYPE": expenseType,
+        DATE: new Date(date).toLocaleDateString(),
       }))
     );
     const csvData = new Blob([csv], { type: "text/csv;charset=utf-8;" });
