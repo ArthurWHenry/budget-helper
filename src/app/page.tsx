@@ -17,6 +17,7 @@ import {
   AddIncome,
   StatCard,
   ClearDialog,
+  TrendChart,
 } from "@/components";
 
 // Type
@@ -37,6 +38,7 @@ function View() {
       <Header />
       <main className="main-container">
         <div className="flex flex-col justify-center items-center gap-6 w-full">
+          <TrendChart />
           <div className="stat-cards">
             <StatCard title="Income" value={income} />
             <StatCard title="Leftover" value={leftover} />

@@ -48,14 +48,15 @@ const AddExpense = () => {
 
   // Handlers
   const onSubmitExpense: SubmitHandler<ExpenseSchema> = (newData) => {
-    setData([
+    const sortedData = [
       ...data,
       {
         ...newData,
         id: uuidv4(),
         expenseType: selectedExpenseType.label,
       },
-    ]);
+    ].sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+    setData([...sortedData]);
 
     // Resetting fields.
     resetField("name");

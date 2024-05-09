@@ -1,0 +1,7 @@
+.trend-chart-container {
+  @apply flex flex-col justify-center items-center h-80 w-full bg-gray-200 p-4 rounded-lg shadow-inner;
+}
+
+.no-data {
+  @apply flex justify-center items-center text-lg text-gray-900;
+}

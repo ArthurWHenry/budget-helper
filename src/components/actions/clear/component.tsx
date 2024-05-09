@@ -32,6 +32,7 @@ const ClearAction: React.FC = () => {
       className="clear-action-button"
       disabled={isDisabled}
       onClick={(): void => handleClearData()}
+      title="Clear Data"
     >
       <TrashIcon className="button-icon" />
     </button>
