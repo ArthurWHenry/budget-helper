@@ -7,7 +7,6 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 import toast from "react-hot-toast";
-import { format, startOfDay } from "date-fns";
 
 // Atoms
 import { expensesDataState } from "@/atoms";
@@ -21,7 +20,7 @@ import "./styles.css";
 // Types
 import { Expense, TableExpense } from "@/types";
 
-const Table = () => {
+const ExpensesTable = () => {
   // State
   const [data, setData] = useRecoilState<Expense[]>(expensesDataState);
 
@@ -140,4 +139,4 @@ const Table = () => {
   );
 };
 
-export default memo(Table);
+export default memo(ExpensesTable);

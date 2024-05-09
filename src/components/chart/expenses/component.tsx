@@ -18,7 +18,7 @@ import {
   ImportAction,
   ViewAction,
 } from "@/components";
-import { CustomLabel } from "./components";
+import { CustomLabel } from "../components";
 
 // Helpers
 import {
@@ -31,7 +31,7 @@ import {
 // Styles
 import "./styles.css";
 
-const Chart = () => {
+const ExpensesChart = () => {
   // Selectors
   const data = useRecoilValue(expensesDataState);
   const income = useRecoilValue(incomeState);
@@ -133,4 +133,4 @@ const Chart = () => {
   );
 };
 
-export default memo(Chart);
+export default memo(ExpensesChart);

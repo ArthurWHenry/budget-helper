@@ -1,2 +1,1 @@
-import Chart from "./component";
-export { Chart };
+export * from "./expenses";

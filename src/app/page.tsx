@@ -11,11 +11,11 @@ import { expensesDataState, incomeState } from "@/atoms";
 // Components
 import {
   AddExpense,
-  Chart,
+  ExpensesChart,
+  ExpensesTable,
   Header,
   AddIncome,
   StatCard,
-  Table,
   ClearDialog,
 } from "@/components";
 
@@ -72,10 +72,10 @@ function View() {
             </TabList>
             <TabPanels className="w-full">
               <TabPanel>
-                <Table />
+                <ExpensesTable />
               </TabPanel>
               <TabPanel>
-                <Chart />
+                <ExpensesChart />
               </TabPanel>
             </TabPanels>
           </TabGroup>
