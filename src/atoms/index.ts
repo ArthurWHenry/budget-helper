@@ -4,6 +4,17 @@ import { atom, RecoilState } from "recoil";
 import { Expense } from "@/types";
 
 /**
+ * Clear dialog state.
+ *
+ * @type {RecoilState<boolean>}
+ * @remarks This state is used to toggle the clear dialog.
+ */
+export const clearDialogState: RecoilState<boolean> = atom({
+  key: "clearDialog",
+  default: false,
+});
+
+/**
  * Income state.
  *
  * @type {RecoilState<number>}
@@ -15,12 +26,12 @@ export const incomeState: RecoilState<number> = atom({
 });
 
 /**
- * Data state.
+ * Expenses data state.
  *
  * @type {RecoilState<Expense[]>}
  * @remarks This state is used to store the user's expenses.
  */
-export const dataState: RecoilState<Expense[]> = atom({
+export const expensesDataState: RecoilState<Expense[]> = atom({
   key: "data",
   default: [] as Expense[],
 });

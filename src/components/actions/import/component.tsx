@@ -6,7 +6,7 @@ import { v4 as uuidv4 } from "uuid";
 import { ArrowDownTrayIcon } from "@heroicons/react/24/solid";
 
 // Atoms
-import { dataState } from "@/atoms";
+import { expensesDataState } from "@/atoms";
 
 // Helpers
 import { getHeader } from "./helpers";
@@ -19,7 +19,7 @@ import { Expense } from "@/types";
 
 const ImportAction: React.FC = () => {
   const setData: SetterOrUpdater<Expense[]> =
-    useSetRecoilState<Expense[]>(dataState);
+    useSetRecoilState<Expense[]>(expensesDataState);
 
   // Hadnle CSV Import
   const handleCSVImport = (event: ChangeEvent<HTMLInputElement>) => {
@@ -61,11 +61,12 @@ const ImportAction: React.FC = () => {
           }));
 
           // Checking that data is valid.
-          addUUID.every(({ name, cost, expenseType }: any) => {
+          addUUID.every(({ name, cost, expenseType, date }: any) => {
             if (
               typeof name !== "string" ||
               typeof cost !== "number" ||
-              typeof expenseType !== "string"
+              typeof expenseType !== "string" ||
+              typeof date !== "string"
             ) {
               throw new Error("Invalid data.");
             }

@@ -9,10 +9,10 @@ import {
 import toast from "react-hot-toast";
 
 // Atoms
-import { dataState } from "@/atoms";
+import { expensesDataState } from "@/atoms";
 
 // Components
-import { ExportAction, ImportAction } from "@/components";
+import { ClearAction, ExportAction, ImportAction } from "@/components";
 
 // Styles
 import "./styles.css";
@@ -20,9 +20,9 @@ import "./styles.css";
 // Types
 import { Expense, TableExpense } from "@/types";
 
-const Table = () => {
+const ExpensesTable = () => {
   // State
-  const [data, setData] = useRecoilState<Expense[]>(dataState);
+  const [data, setData] = useRecoilState<Expense[]>(expensesDataState);
 
   // Helpers
   const columnHelper = createColumnHelper<TableExpense>();
@@ -45,6 +45,14 @@ const Table = () => {
       header: () => <span>Type</span>,
       size: 50,
     }),
+    columnHelper.accessor("date", {
+      header: () => <span>Date</span>,
+      cell: (date) => {
+        return <span>{new Date(date.getValue()).toLocaleDateString()}</span>;
+      },
+      size: 50,
+      maxSize: 50,
+    }),
     columnHelper.accessor("remove", {
       header: "",
       cell: (context: any) => (
@@ -61,7 +69,6 @@ const Table = () => {
   const isHidden = data.length < 1;
 
   // Handlers
-
   // Remove entry
   const removeEntry = (id: string) => {
     setData(data.filter((entry): boolean => entry.id !== id));
@@ -70,7 +77,7 @@ const Table = () => {
 
   // Table setup
   const table = useReactTable({
-    data: data as TableExpense[],
+    data: data as unknown as TableExpense[],
     columns,
     getCoreRowModel: getCoreRowModel(),
   });
@@ -80,6 +87,7 @@ const Table = () => {
       <div className="table-actions">
         <ExportAction />
         <ImportAction />
+        <ClearAction />
       </div>
       {isHidden ? (
         <div className="no-data">
@@ -131,4 +139,4 @@ const Table = () => {
   );
 };
 
-export default memo(Table);
+export default memo(ExpensesTable);

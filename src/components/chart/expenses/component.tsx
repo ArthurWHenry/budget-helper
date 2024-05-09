@@ -9,11 +9,16 @@ import {
   Tooltip,
 } from "recharts";
 // Atoms
-import { dataState, incomeState, viewTotalsState } from "@/atoms";
+import { expensesDataState, incomeState, viewTotalsState } from "@/atoms";
 
 // Components
-import { ExportAction, ImportAction, ViewAction } from "@/components";
-import { CustomLabel } from "./components";
+import {
+  ClearAction,
+  ExportAction,
+  ImportAction,
+  ViewAction,
+} from "@/components";
+import { CustomLabel } from "../components";
 
 // Helpers
 import {
@@ -26,9 +31,9 @@ import {
 // Styles
 import "./styles.css";
 
-const Chart = () => {
+const ExpensesChart = () => {
   // Selectors
-  const data = useRecoilValue(dataState);
+  const data = useRecoilValue(expensesDataState);
   const income = useRecoilValue(incomeState);
   const viewTotals: boolean = useRecoilValue<boolean>(viewTotalsState);
 
@@ -65,6 +70,7 @@ const Chart = () => {
         <ExportAction />
         <ImportAction />
         <ViewAction />
+        <ClearAction />
       </div>
       {isHidden ? (
         <div className="no-data">
@@ -127,4 +133,4 @@ const Chart = () => {
   );
 };
 
-export default memo(Chart);
+export default memo(ExpensesChart);

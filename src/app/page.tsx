@@ -2,20 +2,22 @@
 import { Fragment } from "react";
 import { RecoilRoot, useRecoilValue } from "recoil";
 import { Toaster } from "react-hot-toast";
-import { Tab } from "@headlessui/react";
+import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/react";
 import classNames from "classnames";
 
 // Atoms
-import { dataState, incomeState } from "@/atoms";
+import { expensesDataState, incomeState } from "@/atoms";
 
 // Components
 import {
   AddExpense,
-  Chart,
+  ExpensesChart,
+  ExpensesTable,
   Header,
   AddIncome,
   StatCard,
-  Table,
+  ClearDialog,
+  TrendChart,
 } from "@/components";
 
 // Type
@@ -23,7 +25,7 @@ import { Expense } from "@/types";
 
 function View() {
   // Selectors
-  const data: Expense[] = useRecoilValue(dataState);
+  const data: Expense[] = useRecoilValue(expensesDataState);
   const income: number = useRecoilValue(incomeState);
 
   // Helpers
@@ -36,18 +38,22 @@ function View() {
       <Header />
       <main className="main-container">
         <div className="flex flex-col justify-center items-center gap-6 w-full">
+          <TrendChart />
           <div className="stat-cards">
             <StatCard title="Income" value={income} />
             <StatCard title="Leftover" value={leftover} />
           </div>
           <AddIncome />
           <AddExpense />
-          <Tab.Group>
-            <Tab.List className="tab-list">
+          <TabGroup className="w-full">
+            <TabList className="tab-list">
               <Tab as={Fragment}>
                 {({ selected }) => (
                   <button
-                    className={classNames("tab", { "shadow-none": selected })}
+                    className={classNames(
+                      "tab",
+                      selected ? "shadow-none" : "shadow-md"
+                    )}
                   >
                     Table
                   </button>
@@ -56,22 +62,25 @@ function View() {
               <Tab as={Fragment}>
                 {({ selected }) => (
                   <button
-                    className={classNames("tab", { "shadow-none": selected })}
+                    className={classNames(
+                      "tab",
+                      selected ? "shadow-none" : "shadow-md"
+                    )}
                   >
                     Chart
                   </button>
                 )}
               </Tab>
-            </Tab.List>
-            <Tab.Panels className="w-full">
-              <Tab.Panel>
-                <Table />
-              </Tab.Panel>
-              <Tab.Panel>
-                <Chart />
-              </Tab.Panel>
-            </Tab.Panels>
-          </Tab.Group>
+            </TabList>
+            <TabPanels className="w-full">
+              <TabPanel>
+                <ExpensesTable />
+              </TabPanel>
+              <TabPanel>
+                <ExpensesChart />
+              </TabPanel>
+            </TabPanels>
+          </TabGroup>
         </div>
       </main>
     </div>
@@ -83,6 +92,7 @@ export default function Home() {
     <RecoilRoot>
       <Toaster position="top-center" />
       <View />
+      <ClearDialog />
     </RecoilRoot>
   );
 }

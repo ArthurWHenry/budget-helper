@@ -5,7 +5,7 @@ import { ChartPieIcon as ChartPieIconSolid } from "@heroicons/react/24/solid";
 import { ChartPieIcon as ChartPieIconOutline } from "@heroicons/react/24/outline";
 
 // Atoms
-import { dataState, viewTotalsState } from "@/atoms";
+import { expensesDataState, viewTotalsState } from "@/atoms";
 
 // Styles
 import "./styles.css";
@@ -18,23 +18,25 @@ const ViewAction: React.FC = () => {
   const [viewTotals, setViewTotals] = useRecoilState<boolean>(viewTotalsState);
 
   // Selectors
-  const data: Expense[] = useRecoilValue(dataState);
+  const data: Expense[] = useRecoilValue(expensesDataState);
 
   return (
     <button
-      className={classNames("chart-change-view-action-button", {
-        "transition duration-150 ease-linear hover:bg-gray-600 hover:text-gray-100":
-          data.length > 0,
-      })}
+      className={classNames(
+        "chart-change-view-action-button",
+        {
+          "transition duration-150 ease-linear hover:bg-gray-600 hover:text-gray-100":
+            data.length > 0,
+        },
+        viewTotals
+          ? "bg-gray-300 text-gray-500 shadow-none"
+          : "bg-gray-500 text-gray-50 shadow"
+      )}
       disabled={data.length === 0}
       onClick={() => setViewTotals(!viewTotals)}
       title="View Totals"
     >
-      {viewTotals ? (
-        <ChartPieIconSolid className="button-icon" />
-      ) : (
-        <ChartPieIconOutline className="button-icon" />
-      )}
+      <ChartPieIconOutline className={classNames("button-icon")} />
     </button>
   );
 };

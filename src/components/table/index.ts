@@ -1,2 +1,1 @@
-import Table from "./component";
-export { Table };
+export * from "./expenses";

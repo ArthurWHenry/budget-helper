@@ -6,7 +6,7 @@ import classNames from "classnames";
 import { ArrowUpTrayIcon } from "@heroicons/react/24/solid";
 
 // Atoms
-import { dataState } from "@/atoms";
+import { expensesDataState } from "@/atoms";
 
 // Styles
 import "./styles.css";
@@ -16,14 +16,15 @@ import { Expense } from "@/types";
 
 const ExportAction: React.FC = () => {
   // State
-  const data: Expense[] = useRecoilValue<Expense[]>(dataState);
+  const data: Expense[] = useRecoilValue<Expense[]>(expensesDataState);
 
   const handleCSVExport = () => {
     const csv = Papa.unparse(
-      data.map(({ name, cost, expenseType }) => ({
+      data.map(({ name, cost, expenseType, date }) => ({
         NAME: name,
         COST: cost,
         "EXPENSE TYPE": expenseType,
+        DATE: new Date(date).toLocaleDateString(),
       }))
     );
     const csvData = new Blob([csv], { type: "text/csv;charset=utf-8;" });
