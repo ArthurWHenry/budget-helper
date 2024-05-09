@@ -11,12 +11,12 @@ import {
 import toast from "react-hot-toast";
 
 // Atoms
-import { clearDialogState, dataState } from "@/atoms";
+import { clearDialogState, expensesDataState } from "@/atoms";
 
 const ClearDialog: React.FC = () => {
   // State
   const [isOpen, setIsOpen] = useRecoilState<boolean>(clearDialogState);
-  const resetData: Resetter = useResetRecoilState(dataState);
+  const resetData: Resetter = useResetRecoilState(expensesDataState);
 
   // Handlers
   const handleClearData = () => {

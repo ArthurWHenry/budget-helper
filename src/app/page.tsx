@@ -6,7 +6,7 @@ import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/react";
 import classNames from "classnames";
 
 // Atoms
-import { dataState, incomeState } from "@/atoms";
+import { expensesDataState, incomeState } from "@/atoms";
 
 // Components
 import {
@@ -24,7 +24,7 @@ import { Expense } from "@/types";
 
 function View() {
   // Selectors
-  const data: Expense[] = useRecoilValue(dataState);
+  const data: Expense[] = useRecoilValue(expensesDataState);
   const income: number = useRecoilValue(incomeState);
 
   // Helpers

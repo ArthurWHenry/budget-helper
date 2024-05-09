@@ -26,12 +26,12 @@ export const incomeState: RecoilState<number> = atom({
 });
 
 /**
- * Data state.
+ * Expenses data state.
  *
  * @type {RecoilState<Expense[]>}
  * @remarks This state is used to store the user's expenses.
  */
-export const dataState: RecoilState<Expense[]> = atom({
+export const expensesDataState: RecoilState<Expense[]> = atom({
   key: "data",
   default: [] as Expense[],
 });

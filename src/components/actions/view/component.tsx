@@ -5,7 +5,7 @@ import { ChartPieIcon as ChartPieIconSolid } from "@heroicons/react/24/solid";
 import { ChartPieIcon as ChartPieIconOutline } from "@heroicons/react/24/outline";
 
 // Atoms
-import { dataState, viewTotalsState } from "@/atoms";
+import { expensesDataState, viewTotalsState } from "@/atoms";
 
 // Styles
 import "./styles.css";
@@ -18,7 +18,7 @@ const ViewAction: React.FC = () => {
   const [viewTotals, setViewTotals] = useRecoilState<boolean>(viewTotalsState);
 
   // Selectors
-  const data: Expense[] = useRecoilValue(dataState);
+  const data: Expense[] = useRecoilValue(expensesDataState);
 
   return (
     <button

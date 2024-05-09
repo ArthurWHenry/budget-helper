@@ -9,7 +9,7 @@ import { v4 as uuidv4 } from "uuid";
 import classNames from "classnames";
 
 // Atoms
-import { dataState } from "@/atoms";
+import { expensesDataState } from "@/atoms";
 
 // Components
 import { Input, Select } from "@/components/form";
@@ -40,7 +40,7 @@ const AddExpense = () => {
 
   // State
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [data, setData] = useRecoilState(dataState);
+  const [data, setData] = useRecoilState(expensesDataState);
   const [selectedExpenseType, setSelectedExpenseType] = useState({
     label: "Need",
     value: 0,

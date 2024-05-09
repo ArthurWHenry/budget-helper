@@ -10,7 +10,7 @@ import toast from "react-hot-toast";
 import { format, startOfDay } from "date-fns";
 
 // Atoms
-import { dataState } from "@/atoms";
+import { expensesDataState } from "@/atoms";
 
 // Components
 import { ClearAction, ExportAction, ImportAction } from "@/components";
@@ -23,7 +23,7 @@ import { Expense, TableExpense } from "@/types";
 
 const Table = () => {
   // State
-  const [data, setData] = useRecoilState<Expense[]>(dataState);
+  const [data, setData] = useRecoilState<Expense[]>(expensesDataState);
 
   // Helpers
   const columnHelper = createColumnHelper<TableExpense>();
