@@ -1,5 +1,5 @@
 .chart-actions {
-  @apply w-full flex justify-end items-center gap-2 mb-6 ;
+  @apply w-full flex justify-end items-center gap-2 my-3 ;
 }
 
 .chart-container {

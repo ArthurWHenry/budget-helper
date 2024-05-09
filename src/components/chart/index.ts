@@ -1,2 +1,2 @@
-import Chart from "./component";
-export { Chart };
+export * from "./expenses";
+export * from "./trend";

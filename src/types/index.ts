@@ -32,6 +32,7 @@ export type Expense = {
   id?: string;
   name: string;
   cost: number;
+  date: Date;
   expenseType: string;
   notes?: string;
 };
@@ -39,6 +40,7 @@ export type Expense = {
 export type ExpenseSchema = {
   name: string;
   cost: number;
+  date: Date;
   notes?: string;
 };
 
@@ -54,6 +56,7 @@ export type TableExpense = {
   name: string;
   cost: number;
   expenseType: string;
+  date: string;
   notes?: string;
   remove: JSX.Element;
 };
