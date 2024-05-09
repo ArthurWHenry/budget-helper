@@ -2,7 +2,7 @@
 import { Fragment } from "react";
 import { RecoilRoot, useRecoilValue } from "recoil";
 import { Toaster } from "react-hot-toast";
-import { Tab } from "@headlessui/react";
+import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/react";
 import classNames from "classnames";
 
 // Atoms
@@ -16,6 +16,7 @@ import {
   AddIncome,
   StatCard,
   Table,
+  ClearDialog,
 } from "@/components";
 
 // Type
@@ -42,8 +43,8 @@ function View() {
           </div>
           <AddIncome />
           <AddExpense />
-          <Tab.Group>
-            <Tab.List className="tab-list">
+          <TabGroup className="w-full">
+            <TabList className="tab-list">
               <Tab as={Fragment}>
                 {({ selected }) => (
                   <button
@@ -68,16 +69,16 @@ function View() {
                   </button>
                 )}
               </Tab>
-            </Tab.List>
-            <Tab.Panels className="w-full">
-              <Tab.Panel>
+            </TabList>
+            <TabPanels className="w-full">
+              <TabPanel>
                 <Table />
-              </Tab.Panel>
-              <Tab.Panel>
+              </TabPanel>
+              <TabPanel>
                 <Chart />
-              </Tab.Panel>
-            </Tab.Panels>
-          </Tab.Group>
+              </TabPanel>
+            </TabPanels>
+          </TabGroup>
         </div>
       </main>
     </div>
@@ -89,6 +90,7 @@ export default function Home() {
     <RecoilRoot>
       <Toaster position="top-center" />
       <View />
+      <ClearDialog />
     </RecoilRoot>
   );
 }

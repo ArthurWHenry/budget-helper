@@ -1,9 +1,9 @@
 import { memo } from "react";
-import { Resetter, useRecoilValue, useResetRecoilState } from "recoil";
+import { SetterOrUpdater, useRecoilValue, useSetRecoilState } from "recoil";
 import { TrashIcon } from "@heroicons/react/24/solid";
 
 // Atoms
-import { dataState } from "@/atoms";
+import { clearDialogState, dataState } from "@/atoms";
 
 // Styles
 import "./styles.css";
@@ -13,14 +13,15 @@ import { Expense } from "@/types";
 
 const ClearAction: React.FC = () => {
   // State
-  const resetData: Resetter = useResetRecoilState(dataState);
+  const setClearDialogOpen: SetterOrUpdater<boolean> =
+    useSetRecoilState<boolean>(clearDialogState);
 
   // Selectors
   const data: Expense[] = useRecoilValue<Expense[]>(dataState);
 
   // Handlers
   const handleClearData = () => {
-    resetData();
+    setClearDialogOpen(true);
   };
 
   // Helpers
