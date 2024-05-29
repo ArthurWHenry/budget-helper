@@ -10,10 +10,6 @@
   @apply flex flex-col items-center justify-start max-w-4xl mx-auto px-4 pb-4;
 }
 
-.page {
-  @apply bg-gray-50 min-h-screen;
-}
-
 .stat-cards {
   @apply flex w-full gap-4 flex-col md:flex-row
 }
