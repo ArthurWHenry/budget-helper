@@ -1,36 +1,59 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Budget Helper
 
-## Getting Started
+For a while now, I've been using a Google Sheet to track my bi-weekly expenses. This was in an effort to be more mindful about my finances. One day, I got tired of creating new sheets from a template and decided to build this tool.
 
-First, run the development server:
+Not only do I like keeping track of where my money previously went to better understand my spending habits, I like to manually enter my expenses each pay period to better understand where my money is going.
+
+This has been helpful for me and hopefully it can be for you as well!
+
+## Demo
+
+[Live Demo](https://budget-helper-eight.vercel.app/)
+
+## Run Locally
+
+Clone the project
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+  # via SSH
+  git@github.com:ArthurWHenry/budget-helper.git
+
+  # via HTTPS
+  https://github.com/ArthurWHenry/budget-helper.git
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Go to the project directory
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+  cd budget-helper
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+If you haven't already, install dependencies
 
-## Learn More
+```bash
+  npm install
+```
 
-To learn more about Next.js, take a look at the following resources:
+Start the server
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+  npm run dev
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Contributing
 
-## Deploy on Vercel
+Contributions are always welcome!
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Features
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- Download and import CSV
+- Charts and tables to view budget data
+- Responsive for mobile
+
+## Feedback
+
+If you have any feedback, please reach out to me at awilmarhenry@gmail.com
+
+## License
+
+[MIT](https://choosealicense.com/licenses/mit/)
