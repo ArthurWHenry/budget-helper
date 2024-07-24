@@ -4,7 +4,11 @@ import { useRecoilState } from "recoil";
 import { toast } from "react-hot-toast";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { ChevronRightIcon } from "@heroicons/react/24/solid";
-import { Disclosure } from "@headlessui/react";
+import {
+  Disclosure,
+  DisclosureButton,
+  DisclosurePanel,
+} from "@headlessui/react";
 import { v4 as uuidv4 } from "uuid";
 import classNames from "classnames";
 
@@ -71,12 +75,13 @@ const AddExpense = () => {
 
   return (
     <div
+      data-cy="add-expense-container"
       className={classNames("add-expense-container", { "shadow-md": !isOpen })}
     >
       <Disclosure>
         {({ open }) => (
           <>
-            <Disclosure.Button
+            <DisclosureButton
               className="add-expense-button"
               onClick={(): void => setIsOpen(!isOpen)}
             >
@@ -86,10 +91,11 @@ const AddExpense = () => {
                   "rotate-90 transform": open,
                 })}
               />
-            </Disclosure.Button>
-            <Disclosure.Panel className="add-expense-panel">
+            </DisclosureButton>
+            <DisclosurePanel className="add-expense-panel">
               <div className="gap-2 flex flex-col pb-4 px-4 w-full">
                 <form
+                  data-cy="add-expense-form"
                   className="add-expense-form"
                   onSubmit={handleSubmit(onSubmitExpense)}
                 >
@@ -127,6 +133,7 @@ const AddExpense = () => {
                     </div>
                   </div>
                   <button
+                    data-cy="add-expense-button-submit"
                     className="add-expense-button-submit"
                     disabled={Object.keys(errors).length > 0}
                     type="submit"
@@ -135,14 +142,17 @@ const AddExpense = () => {
                   </button>
                 </form>
                 {Object.keys(errors).length > 0 && (
-                  <div className="add-expense-error">
+                  <div
+                    data-cy="add-expense-error"
+                    className="add-expense-error"
+                  >
                     {Object.values(errors).map(({ message }, idx) => (
                       <span key={idx}>{message}</span>
                     ))}
                   </div>
                 )}
               </div>
-            </Disclosure.Panel>
+            </DisclosurePanel>
           </>
         )}
       </Disclosure>

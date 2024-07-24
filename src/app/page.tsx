@@ -22,15 +22,15 @@ import {
 // Type
 import { Expense } from "@/types";
 
-function View() {
+function View(): JSX.Element {
   // Selectors
   const data: Expense[] = useRecoilValue(expensesDataState);
   const income: number = useRecoilValue(incomeState);
 
   // Helpers
-  const leftover =
+  const leftover: number =
     (Number.isNaN(income) ? 0 : income) -
-    data.reduce((acc, { cost }) => acc + cost, 0);
+    data.reduce((acc: number, { cost }: Expense): number => acc + cost, 0);
 
   return (
     <main className="">
@@ -46,7 +46,7 @@ function View() {
         <TabGroup className="w-full min-h-96">
           <TabList className="tab-list">
             <Tab as={Fragment}>
-              {({ selected }) => (
+              {({ selected }): JSX.Element => (
                 <button
                   className={classNames(
                     "tab",
@@ -58,7 +58,7 @@ function View() {
               )}
             </Tab>
             <Tab as={Fragment}>
-              {({ selected }) => (
+              {({ selected }): JSX.Element => (
                 <button
                   className={classNames(
                     "tab",
@@ -84,7 +84,7 @@ function View() {
   );
 }
 
-export default function Home() {
+export default function Home(): JSX.Element {
   return (
     <RecoilRoot>
       <View />

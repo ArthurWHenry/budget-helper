@@ -66,18 +66,18 @@ const ExpensesChart = () => {
 
   return (
     <>
-      <div className="chart-actions">
+      <div data-cy="chart-actions" className="chart-actions">
         <ExportAction />
         <ImportAction />
         <ViewAction />
         <ClearAction />
       </div>
       {isHidden ? (
-        <div className="no-data">
+        <div data-cy="no-data" className="no-data">
           <span>Import or add data to see the chart.</span>
         </div>
       ) : (
-        <div className="flex justify-center items-center">
+        <div data-cy="pie-chart" className="flex justify-center items-center">
           <ResponsiveContainer
             height="100%"
             width="100%"

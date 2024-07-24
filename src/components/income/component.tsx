@@ -3,7 +3,11 @@ import { SetterOrUpdater, useSetRecoilState } from "recoil";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import classNames from "classnames";
-import { Disclosure } from "@headlessui/react";
+import {
+  Disclosure,
+  DisclosureButton,
+  DisclosurePanel,
+} from "@headlessui/react";
 import { ChevronRightIcon } from "@heroicons/react/24/solid";
 
 // Atoms
@@ -48,7 +52,7 @@ const AddIncome: React.FC = () => {
       <Disclosure>
         {({ open }) => (
           <>
-            <Disclosure.Button
+            <DisclosureButton
               className="add-income-button"
               onClick={(): void => setIsOpen(!isOpen)}
             >
@@ -58,9 +62,12 @@ const AddIncome: React.FC = () => {
                   "rotate-90 transform": open,
                 })}
               />
-            </Disclosure.Button>
-            <Disclosure.Panel className="add-income-panel">
-              <div className="gap-2 flex flex-col pb-4 px-4 w-full">
+            </DisclosureButton>
+            <DisclosurePanel className="add-income-panel">
+              <div
+                data-cy="add-income-form"
+                className="gap-2 flex flex-col pb-4 px-4 w-full"
+              >
                 <form
                   className="add-income-form"
                   onSubmit={handleSubmit(onSubmitIncome)}
@@ -73,7 +80,11 @@ const AddIncome: React.FC = () => {
                     error={errors.income}
                   />
 
-                  <button className="add-income-button-submit" type="submit">
+                  <button
+                    data-cy="add-income-button-submit"
+                    className="add-income-button-submit"
+                    type="submit"
+                  >
                     Set Income
                   </button>
                 </form>
@@ -85,7 +96,7 @@ const AddIncome: React.FC = () => {
                   </div>
                 )}
               </div>
-            </Disclosure.Panel>
+            </DisclosurePanel>
           </>
         )}
       </Disclosure>

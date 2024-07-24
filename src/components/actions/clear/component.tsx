@@ -29,6 +29,7 @@ const ClearAction: React.FC = () => {
 
   return (
     <button
+      data-cy="clear-action-button"
       className="clear-action-button"
       disabled={isDisabled}
       onClick={(): void => handleClearData()}

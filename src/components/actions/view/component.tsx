@@ -22,6 +22,7 @@ const ViewAction: React.FC = () => {
 
   return (
     <button
+      data-cy="view-action-button"
       className={classNames(
         "chart-change-view-action-button",
         {

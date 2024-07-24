@@ -81,7 +81,7 @@ const TrendChart = () => {
   });
 
   return (
-    <div className="trend-chart-container">
+    <div data-cy="trend-chart" className="trend-chart-container">
       <h2 className="font-semibold text-lg text-gray-900">Income Trend</h2>
       <ResponsiveContainer
         height="100%"

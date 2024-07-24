@@ -54,12 +54,14 @@ const ClearDialog: React.FC = () => {
                 </p>
                 <div className="flex justify-end gap-2 mt-2 items-center">
                   <Button
+                    data-cy="clear-dialog-cancel-button"
                     className="bg-red-600 text-gray-50 px-2 py-1 rounded-md transition duration-150 hover:opacity-70"
                     onClick={(): void => setIsOpen(false)}
                   >
                     Cancel
                   </Button>
                   <Button
+                    data-cy="clear-dialog-clear-button"
                     className="bg-gray-600 px-2 py-1 rounded-md text-gray-50 transition duration-150 hover:opacity-70"
                     onClick={(): void => handleClearData()}
                   >

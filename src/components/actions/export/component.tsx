@@ -33,6 +33,7 @@ const ExportAction: React.FC = () => {
 
   return (
     <button
+      data-cy="export-action-button"
       className={classNames("export-action-button", {
         "transition duration-150 ease-linear hover:bg-gray-600 hover:text-gray-100":
           data.length > 0,

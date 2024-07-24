@@ -84,6 +84,7 @@ const ImportAction: React.FC = () => {
   return (
     <div className="flex">
       <input
+        data-cy="csv-import"
         id="csv-import"
         type="file"
         accept=".csv"

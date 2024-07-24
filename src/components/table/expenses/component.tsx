@@ -84,13 +84,13 @@ const ExpensesTable = () => {
 
   return (
     <>
-      <div className="table-actions">
+      <div data-cy="table-actions" className="table-actions">
         <ExportAction />
         <ImportAction />
         <ClearAction />
       </div>
       {isHidden ? (
-        <div className="no-data">
+        <div data-cy="no-data" className="no-data">
           <span>Import or add data to see the table.</span>
         </div>
       ) : (

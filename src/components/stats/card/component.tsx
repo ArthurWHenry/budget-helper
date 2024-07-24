@@ -17,7 +17,10 @@ const StatCard: React.FC<StatCardProps> = ({ title, value }: StatCardProps) => {
   const result = isNegative ? `-${formattedValue}` : formattedValue;
 
   return (
-    <div className={classNames("stat-container", statColor(value))}>
+    <div
+      data-cy="stat-card"
+      className={classNames("stat-container", statColor(value))}
+    >
       <h3 className="stat-title">{title}</h3>
       <span className="stat-value">{result}</span>
     </div>
